@@ -15,7 +15,7 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: "https://cpra-mp.github.io/mp23-digital-plan-testing/",
+  url: "https://cpra-mp.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/mp23-digital-plan-testing/",
