@@ -22,8 +22,8 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "facebook", // Usually your GitHub org/user name.
-  projectName: "docusaurus", // Usually your repo name.
+  organizationName: "cpra-mp", // Usually your GitHub org/user name.
+  projectName: "mp23-digital-plan-testing", // Usually your repo name.
 
   onBrokenLinks: "throw",
 
@@ -39,27 +39,13 @@ const config: Config = {
     [
       "classic",
       {
+        blog: false,
         docs: {
+          path: "plan",
+          routeBasePath: "plan",
           sidebarPath: "./sidebars.ts",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
-        },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ["rss", "atom"],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
-          // Useful options to enforce blogging best practices
-          onInlineTags: "warn",
-          onInlineAuthors: "warn",
-          onUntruncatedBlogPosts: "warn",
+            "https://github.com/CPRA-MP/mp23-digital-plan-testing/tree/main",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -85,11 +71,10 @@ const config: Config = {
           type: "docSidebar",
           sidebarId: "tutorialSidebar",
           position: "left",
-          label: "Tutorial",
+          label: "2023 Coastal Master Plan",
         },
-        { to: "/blog", label: "Blog", position: "left" },
         {
-          href: "https://github.com/facebook/docusaurus",
+          href: "https://github.com/cpra-mp/mp23-digital-plan-testing",
           label: "GitHub",
           position: "right",
         },
@@ -99,46 +84,25 @@ const config: Config = {
       style: "dark",
       links: [
         {
-          title: "Docs",
+          title: "2023 Coastal Master Plan",
           items: [
             {
-              label: "Tutorial",
-              to: "/docs/intro",
+              label: "Predict",
+              to: "/plan/category/predict",
             },
           ],
         },
         {
-          title: "Community",
+          title: "Learn More",
           items: [
             {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/docusaurus",
-            },
-            {
-              label: "Discord",
-              href: "https://discordapp.com/invite/docusaurus",
-            },
-            {
-              label: "X",
-              href: "https://x.com/docusaurus",
-            },
-          ],
-        },
-        {
-          title: "More",
-          items: [
-            {
-              label: "Blog",
-              to: "/blog",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/facebook/docusaurus",
+              label: "CPRA",
+              href: "https://coastal.la.gov",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Coastal Protection and Restoration Authority`,
     },
     prism: {
       theme: prismThemes.github,
