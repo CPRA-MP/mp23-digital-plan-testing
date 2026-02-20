@@ -20,7 +20,7 @@ The interaction between storms, waves, and the landscape is represented in two o
 **When modeling the possible futures of coastal Louisiana, outcomes are significantly impacted by the chosen starting point.** The first step to develop modeled Future Without further Action (FWOA) landscapes for each iteration of master planning is to update landscape data to reflect the changes that have occurred since they were updated in 2018 for the 2023 Coastal Master Plan analysis. This update accounts for landscape changes such as continued land loss, land gain, surface elevation changes, construction of restoration projects, and changes in land use and vegetation cover. For 2029 master plan modeling, we used survey and satellite data available through the end of the year 2024 to develop the _**existing conditions landscape**_. Experts spent most of 2025 gathering and preparing that data for use in our models. For technical details on the existing conditions data sources and processing, see [LINK].
 
 <figure>
-    ![Master Plan Modeling Starting Points.](./FWOA-modeling-flow-chart.png)
+    ![Master Plan Modeling Starting Points.](./FWOA-modeling-flow-chart2.png)
     <figcaption>Master Plan Modeling Starting Points. Multiple pieces of information are used together to develop the existing conditions landscape, the initial conditions landscape, and finally the FWOA landscapes we use for developing the coastal master plan.</figcaption>
 </figure> 
 
