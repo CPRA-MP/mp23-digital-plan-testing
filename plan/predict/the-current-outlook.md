@@ -14,7 +14,7 @@ When modeling the possible futures of coastal Louisiana, outcomes are significan
 
 It is important that the initial landscape conditions used in the modeling represent the on the ground conditions as much as possible so that there is confidence that model outputs reasonably reflect landscape responses to candidate restoration and risk reduction projects.
 
-## Future Without Action Currently Funded Projects (FWOCFP)
+## Future Without Currently Funded Projects (FWOCFP)
 
 As part of the 2023 Coastal Master Plan development, the ICM was run for 50 years under a condition referred to as "Future Without Currently Funded Projects (FWOCFP)." For these model runs, the only restoration or risk reduction projects modeled on the landscape are those that have already been constructed. Some of these projects are included in the existing conditions coastwide digital elevation model (DEM), which captures the location and elevation of these projects along with the rest of the landscape features.
 
