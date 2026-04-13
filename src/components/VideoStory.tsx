@@ -68,23 +68,23 @@ export default function VideoStory({
       let startX;
 
       // Start dragging: record initial mouse position and scroll state
-      slider.addEventListener("mousedown", (e) => {
+      slider.addEventListener("pointerdown", (e) => {
         isDown = true;
         startX = e.pageX - video.offsetLeft;
       });
 
       // End dragging: clear state
-      slider.addEventListener("mouseleave", () => {
+      slider.addEventListener("pointercancel", () => {
         isDown = false;
         slider.style.cursor = "grab";
       });
-      slider.addEventListener("mouseup", () => {
+      slider.addEventListener("pointerup", () => {
         isDown = false;
         slider.style.cursor = "grab";
       });
 
       // Perform scrolling: update scroll position based on mouse movement
-      slider.addEventListener("mousemove", (e) => {
+      slider.addEventListener("pointermove", (e) => {
         const change = e.pageX - startX;
         if (!isDown || Math.abs(change) < 5) return;
         slider.style.cursor = "grabbing";
