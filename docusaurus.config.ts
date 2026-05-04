@@ -5,8 +5,8 @@ import type * as Preset from "@docusaurus/preset-classic";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: "Lousiana's Coastal Master Plan Test",
-  tagline: "Testing site for a digital-first master plan",
+  title: "Exploring a Future Without Action",
+  tagline: "Louisiana's 2029 Coastal Master Plan (TEST)",
   favicon: "img/favicon.png",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -74,17 +74,26 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: "Master Plan Test",
+      title: "Exploring a Future Without Action",
       logo: {
-        alt: "My Site Logo",
+        alt: "Coastal Protection and Restoration Authority of Louisiana",
         src: "img/logo.png",
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "tutorialSidebar",
+          href: "/#overview",
+          label: "Overview",
           position: "left",
-          label: "2023 Coastal Master Plan",
+        },
+        {
+          href: "/plan/results/",
+          label: "Model Results",
+          position: "left",
+        },
+        {
+          href: "/plan/technical-details/",
+          label: "Technical Details",
+          position: "left",
         },
         {
           href: "https://github.com/cpra-mp/mp23-digital-plan-testing",
@@ -97,11 +106,19 @@ const config: Config = {
       style: "dark",
       links: [
         {
-          title: "2023 Coastal Master Plan",
+          title: "Exploring a Future Without Action",
           items: [
             {
-              label: "Predicting a Future Without Action",
-              to: "/plan/category/predicting-a-future-without-action",
+              label: "Overview",
+              to: "/#overview",
+            },
+            {
+              label: "Model Results",
+              to: "/plan/results/",
+            },
+            {
+              label: "Technical Details",
+              to: "/plan/technical-details/",
             },
           ],
         },

@@ -20,7 +20,7 @@ The interaction between storms, waves, and the landscape is represented in two o
 **When modeling the possible futures of coastal Louisiana, outcomes are significantly impacted by the chosen starting point.** The first step to develop modeled Future Without further Action (FWOA) landscapes for each iteration of master planning is to update landscape data to reflect the changes that have occurred since they were updated in 2018 for the 2023 Coastal Master Plan analysis. This update accounts for landscape changes such as continued land loss, land gain, surface elevation changes, construction of restoration projects, and changes in land use and vegetation cover. For 2029 master plan modeling, we used survey and satellite data available through the end of the year 2024 to develop the _**existing conditions landscape**_. Experts spent most of 2025 gathering and preparing that data for use in our models. For technical details on the existing conditions data sources and processing, see [LINK].
 
 <figure>
-    ![Master Plan Modeling Starting Points.](./FWOA-modeling-flow-chart2.png)
+    ![Master Plan Modeling Starting Points.](./FWOA-modeling-flow-chart.png)
     <figcaption>Master Plan Modeling Starting Points. Multiple pieces of information are used together to develop the existing conditions landscape, the initial conditions landscape, and finally the FWOA landscapes we use for developing the coastal master plan.</figcaption>
 </figure> 
 
@@ -67,4 +67,4 @@ Values or rates were derived from observed data and trends and/or related global
     <figcaption>Subsidence Rates for 2029 Coastal Master Planning.</figcaption>
 </figure>
 
-Model outputs from future simulations applying the two scenarios defined for project selection will support delineation of a range of possible future landscapes and damage profiles based on variable projections for sea level rise given moderate assumptions related to climate change. While the use of this scenario approach does not make the future more certain, it does provide for a more complete understanding of what may come. The focus on a possible range of outcomes rather than a single prediction increases confidence that decisions made using outputs from master plan analyses help Louisiana prepare for  future conditions. 
+Model outputs from future simulations applying the two scenarios defined for project selection will support delineation of a range of possible future landscapes and damage profiles based on variable projections for sea level rise given moderate assumptions related to climate change. While the use of this scenario approach does not make the future more certain, it does provide for a more complete understanding of what may come. The focus on a possible range of outcomes rather than a single prediction increases confidence that decisions made using outputs from master plan analyses help Louisiana prepare for  future conditions.

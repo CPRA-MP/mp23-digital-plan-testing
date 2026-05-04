@@ -32,7 +32,7 @@ export default function Home(): ReactNode {
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <HomepageHeader />
-      <main>
+      <main id="overview">
         <VideoStory src="https://api.mpdp.coastal.la.gov/static/video/fwoa-land-change-20260413.mp4">
           <StoryPage>
             <h2>Page 1</h2>
