@@ -7,13 +7,10 @@ description: Model results for the Future Without Action scenario
 
 ## Land Change
 
-import ComparisonMap from '@site/src/components/ComparisonMap';
+import Map from '@site/src/components/Map';
 
 <figure>
-    <ComparisonMap
-        beforeUrl="https://api.mpdp.coastal.la.gov/v1/datasets/lnd_type/morph_pixel_v001/annual/visualization/map.json?model_group_id=500&scenario_id=7&calendar_year=2019&calendar_year=2070&multiply10=calendar_year%3D2019&group_by=model_group_id%2Cscenario_id&group_aggregate=sum&show_grid_labels=false&show_grid_lines=true&show_projects=true&show_water=false"
-        afterUrl="https://api.mpdp.coastal.la.gov/v1/datasets/lnd_type/morph_pixel_v001/annual/visualization/map.json?model_group_id=500&scenario_id=8&calendar_year=2019&calendar_year=2070&multiply10=calendar_year%3D2019&group_by=model_group_id%2Cscenario_id&group_aggregate=sum&show_grid_labels=false&show_grid_lines=true&show_projects=true&show_water=false"
-    />
+    <Map />
     <figcaption>
         **Land Change, Future Without Action, Year 50:** The lower environmental scenario is on the left, and the higher environmental scenario is on the right. Move the slider to compare the two scenarios. You can also [explore land change data in the Master Plan Data Portal](https://mpdp.coastal.la.gov/#analysis=concatenate%3Acalendar_year&calendar_year=2019&calendar_year=2070&grid=morph_pixel_v001&map=8.00/29.75/-91.50&model_group_id=500&scenario_id=7&time_unit=annual&variable=lnd_type) or download the [lower scenario GeoTIFF](https://api.mpdp.coastal.la.gov/v1/datasets/lnd_type/morph_pixel_v001/annual/visualization/map.json?model_group_id=500&scenario_id=7&calendar_year=2019&calendar_year=2070&multiply10=calendar_year%3D2019&group_by=model_group_id%2Cscenario_id&group_aggregate=sum) or [higher scenario GeoTIFF](https://api.mpdp.coastal.la.gov/v1/datasets/lnd_type/morph_pixel_v001/annual/visualization/map.json?model_group_id=500&scenario_id=8&calendar_year=2019&calendar_year=2070&multiply10=calendar_year%3D2019&group_by=model_group_id%2Cscenario_id&group_aggregate=sum).
     </figcaption>
