@@ -1,0 +1,55 @@
+import { Suspense } from "react";
+import { useAtomValue, Provider as JotaiProvider } from "jotai";
+import {
+  Chart,
+  Map,
+  ScopeDataProvider,
+  ThemeProvider,
+  TimeSelect,
+  selectedGeographiesAtom,
+  store,
+} from "@cpra/mp-ui";
+
+import "maplibre-gl/dist/maplibre-gl.css";
+
+function MiniPortalToolbar({ title }) {
+  return (
+    <div className="p-3 flex gap-2 items-center">
+      {title && <h2 className="text-lg m-0 p-0 shrink-0 me-3">{title}</h2>}
+      <TimeSelect showSelectionMode={false} />
+    </div>
+  );
+}
+
+function MiniPortalContent({ title }) {
+  const selectedGeographies = useAtomValue(selectedGeographiesAtom);
+  console.log("in scope", selectedGeographies);
+
+  return (
+    <div className="border bg-popover">
+      <Suspense>
+        <MiniPortalToolbar title={title} />
+        <Map className="h-125" />
+      </Suspense>
+      <Suspense>
+        {selectedGeographies.length > 0 && (
+          <div className="h-125 p-3">
+            <Chart />
+          </div>
+        )}
+      </Suspense>
+    </div>
+  );
+}
+
+export default function MiniPortal({ title, ...dataProps }) {
+  return (
+    <JotaiProvider store={store}>
+      <ScopeDataProvider {...dataProps}>
+        <ThemeProvider>
+          <MiniPortalContent title={title} />
+        </ThemeProvider>
+      </ScopeDataProvider>
+    </JotaiProvider>
+  );
+}
