@@ -13,7 +13,7 @@ function HomepageHeader() {
   return (
     <header
       className={clsx(
-        "hero hero--primary h-[--page-height]",
+        "hero hero--primary h-(--page-height)",
         styles.heroBanner,
       )}
     >

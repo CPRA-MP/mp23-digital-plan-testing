@@ -95,14 +95,14 @@ export default function VideoStory({
 
   return (
     <div className="w-dvw cursor-grab select-none" ref={containerRef}>
-      <div className="bg-white w-dvw overflow-hidden sticky top-[--header-height] z-1">
+      <div className="bg-white w-dvw overflow-hidden sticky top-(--header-height) z-1">
         <video
           src={src}
           playsInline={true}
           webkit-playsinline="true"
           preload="auto"
           muted={true}
-          className={`h-[--page-height]`}
+          className={`h-(--page-height)`}
           style={{
             marginLeft: `calc((${Math.round(bounds.width)}px - 100dvw) * -1 / 2)`,
           }}

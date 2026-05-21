@@ -7,13 +7,15 @@ import {
 import { Provider as JotaiProvider } from "jotai";
 import { Suspense } from "react";
 
+import "maplibre-gl/dist/maplibre-gl.css";
+
 export default function Map() {
   return (
     <JotaiProvider store={store}>
       <HashDataProvider>
         <ThemeProvider>
           <Suspense>
-            <CpraMap className="h-[400px]" />
+            <CpraMap className="h-125" />
           </Suspense>
         </ThemeProvider>
       </HashDataProvider>
