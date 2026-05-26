@@ -23,7 +23,6 @@ function MiniPortalToolbar({ title }) {
 
 function MiniPortalContent({ title }) {
   const selectedGeographies = useAtomValue(selectedGeographiesAtom);
-  console.log("in scope", selectedGeographies);
 
   return (
     <div className="border bg-popover">

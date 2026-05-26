@@ -1,3 +1,4 @@
+import path from "path";
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
@@ -36,6 +37,30 @@ const config: Config = {
   },
 
   plugins: [
+    // Prevent Webpack from creating duplicate copies of Jotai dependencies.
+    // This happens because @cpra/mp-ui has its own copies of these modules.
+    async function deduplicatePlugin() {
+      return {
+        name: "deduplicate-peer-deps",
+        configureWebpack() {
+          return {
+            resolve: {
+              alias: {
+                jotai: path.resolve(__dirname, "node_modules/jotai"),
+                "jotai-effect": path.resolve(
+                  __dirname,
+                  "node_modules/jotai-effect",
+                ),
+                "jotai-scope": path.resolve(
+                  __dirname,
+                  "node_modules/jotai-scope",
+                ),
+              },
+            },
+          };
+        },
+      };
+    },
     async function tailwindPlugin() {
       return {
         name: "docusaurus-tailwindcss",
