@@ -25,14 +25,14 @@ function MiniPortalContent({ title }) {
   const selectedGeographies = useAtomValue(selectedGeographiesAtom);
 
   return (
-    <div className="border bg-popover">
+    <div className="border bg-popover mb-6">
       <Suspense>
         <MiniPortalToolbar title={title} />
-        <Map className="h-125" />
+        <Map className="h-125 max-h-[40vh]" />
       </Suspense>
       <Suspense>
         {selectedGeographies.length > 0 && (
-          <div className="h-125 p-3">
+          <div className="h-125 max-h-[40vh] p-3">
             <Chart />
           </div>
         )}
