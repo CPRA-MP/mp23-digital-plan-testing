@@ -6,17 +6,31 @@ import {
   ScopeDataProvider,
   ThemeProvider,
   TimeSelect,
+  dataPermalinkAtom,
   selectedGeographiesAtom,
   store,
 } from "@cpra/mp-ui";
 
 import "maplibre-gl/dist/maplibre-gl.css";
+import { Button } from "@/components/ui/button";
+import { SquareArrowOutUpRight } from "lucide-react";
 
 function MiniPortalToolbar({ title }) {
+  const dataPermalink = useAtomValue(dataPermalinkAtom);
+
   return (
     <div className="p-3 flex gap-2 items-center">
       {title && <h2 className="text-lg m-0 p-0 shrink-0 me-3">{title}</h2>}
       <TimeSelect showSelectionMode={false} />
+      <Button
+        asChild
+        title={`Open ${title} in the Master Plan Data Portal`}
+        variant="outline"
+      >
+        <a href={dataPermalink} target="_blank">
+          <SquareArrowOutUpRight />
+        </a>
+      </Button>
     </div>
   );
 }

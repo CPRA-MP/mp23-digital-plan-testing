@@ -46,6 +46,7 @@ const config: Config = {
           return {
             resolve: {
               alias: {
+                "@": path.resolve(__dirname, "src"),
                 jotai: path.resolve(__dirname, "node_modules/jotai"),
                 "jotai-effect": path.resolve(
                   __dirname,
