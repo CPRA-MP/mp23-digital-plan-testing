@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useAtomValue, Provider as JotaiProvider, atom, useAtom } from "jotai";
 import {
   Chart,
@@ -16,7 +16,7 @@ import {
 
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Button } from "@/components/ui/button";
-import { SquareArrowOutUpRight, X } from "lucide-react";
+import { Menu, SquareArrowOutUpRight, X } from "lucide-react";
 
 const hasChoices = (name, dataProps, analysis) => {
   const values = dataProps[name];
@@ -56,11 +56,29 @@ function MiniPortalInstructions() {
 }
 
 function MiniPortalToolbar({ title, ...dataProps }) {
+  const [open, setOpen] = useState(false);
+  const [narrow, setNarrow] = useState(false);
+  const timeSelectRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = timeSelectRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => {
+      setNarrow(entry.contentRect.width < 300);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!narrow) setOpen(false);
+  }, [narrow]);
+
   const analysis = useAtomValue(analysisAtom);
   const dataPermalink = useAtomValue(dataPermalinkAtom);
   const catalogQueries = useAtomValue(catalogQueriesAtom);
 
-  const dimensionSelects = catalogQueries.activeDimensions
+  const activeDimensionConfigs = catalogQueries.activeDimensions
     .filter(
       (dim) =>
         dim.filterType === "select" &&
@@ -73,32 +91,101 @@ function MiniPortalToolbar({ title, ...dataProps }) {
         choices = values
           .map((item) => (Array.isArray(item) ? item : [item, item.toString()]))
           .map(([value, label]) => ({ value, label }));
-      return (
-        <DimensionSelect
-          choices={choices}
-          key={dimension.name}
-          className="w-auto min-w-35 mb-0"
-          name={dimension.name}
-          showSelectionMode={false}
-        />
-      );
+      return { name: dimension.name, choices };
     });
 
+  const dimensionSelects = activeDimensionConfigs.map(({ name, choices }) => (
+    <DimensionSelect
+      choices={choices}
+      key={name}
+      className="w-auto min-w-35 mb-0"
+      name={name}
+      showSelectionMode={false}
+    />
+  ));
+
+  const dimensionSelectsMobile = activeDimensionConfigs.map(
+    ({ name, choices }) => (
+      <DimensionSelect
+        choices={choices}
+        key={name}
+        className="w-full mb-0"
+        name={name}
+        showSelectionMode={false}
+      />
+    ),
+  );
+
+  const portalLink = (
+    <Button
+      asChild
+      title={`Open ${title} in the Master Plan Data Portal`}
+      variant="outline"
+    >
+      <a href={dataPermalink} target="_blank">
+        <SquareArrowOutUpRight />
+      </a>
+    </Button>
+  );
+
   return (
-    <div className="p-3 flex gap-2 items-center">
-      {title && <h2 className="text-lg m-0 p-0 shrink-0 me-3">{title}</h2>}
-      {dimensionSelects}
-      <TimeSelect showSelectionMode={false} />
-      <Button
-        asChild
-        title={`Open ${title} in the Master Plan Data Portal`}
-        variant="outline"
+    <>
+      {/* Always rendered so the TimeSelect can be measured via ResizeObserver;
+          invisible + non-interactive when narrow so the overlay covers it */}
+      <div
+        className={`p-3 flex gap-2 items-center${narrow ? " invisible pointer-events-none" : ""}`}
       >
-        <a href={dataPermalink} target="_blank">
-          <SquareArrowOutUpRight />
-        </a>
-      </Button>
-    </div>
+        {title && <h2 className="text-lg m-0 p-0 shrink-0 me-3">{title}</h2>}
+        {dimensionSelects}
+        <div ref={timeSelectRef} className="flex-1 min-w-0 flex items-center">
+          <TimeSelect showSelectionMode={false} />
+        </div>
+        {portalLink}
+      </div>
+      {/* Narrow bar — overlays the wide toolbar when narrow */}
+      {narrow && (
+        <div className="absolute inset-x-0 top-0 p-3 flex items-center justify-between bg-popover z-10">
+          {title && <h2 className="text-lg m-0 p-0 shrink-0">{title}</h2>}
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <Menu />
+            <span className="sr-only">Open controls</span>
+          </Button>
+        </div>
+      )}
+      {/* Controls panel — absolutely positioned within the mini portal container */}
+      {narrow && open && (
+        <div className="absolute top-0 right-0 bottom-0 w-3/4 max-w-xs bg-popover border-l z-50 flex flex-col gap-5 p-4 shadow-lg">
+          <div className="flex items-center justify-between">
+            {title && <span className="text-base font-medium">{title}</span>}
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => setOpen(false)}
+            >
+              <X />
+              <span className="sr-only">Close</span>
+            </Button>
+          </div>
+          {dimensionSelectsMobile}
+          <TimeSelect showSelectionMode={false} />
+          <Button
+            asChild
+            className="no-underline"
+            title={`Open ${title} in the Master Plan Data Portal`}
+            variant="outline"
+          >
+            <a href={dataPermalink} target="_blank">
+              <SquareArrowOutUpRight />
+              View in Data Portal
+            </a>
+          </Button>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -106,7 +193,7 @@ function MiniPortalContent({ title, ...dataProps }) {
   const selectedGeographies = useAtomValue(selectedGeographiesAtom);
 
   return (
-    <div className="border bg-popover mb-6">
+    <div className="relative border bg-popover mb-6">
       <Suspense>
         <MiniPortalToolbar title={title} {...dataProps} />
         <div className="h-125 max-h-[40vh] relative">
