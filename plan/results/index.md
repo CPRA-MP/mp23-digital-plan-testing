@@ -9,9 +9,9 @@ description: Model results for the Future Without Action scenario
 
 import MiniPortal from '@site/src/components/MiniPortal';
 
-<MiniPortal title="Land Type" variable="lnd_type" grid="morph_pixel_v001" time_unit="annual" />
+<MiniPortal title="Land Type" variable="lnd_type" grid="morph_pixel_v001" time_unit="annual" model_group_id={500} scenario_id={[[7, "Lower"], [8, "Higher"]]} />
 
-<MiniPortal title="Salinity" variable="sal" grid="hydro_compartment_v001" time_unit="annual" />
+<MiniPortal title="Mean Annual Salinity" variable="sal" grid="hydro_compartment_v001" time_unit="annual" aggregate_type="mean" scenario_id={[[7, "Lower"], [8, "Higher"]]} />
 
 ### Lower Scenario
 
