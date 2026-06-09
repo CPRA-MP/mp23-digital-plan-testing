@@ -1,5 +1,5 @@
-import { Suspense } from "react";
-import { useAtomValue, Provider as JotaiProvider } from "jotai";
+import { Suspense, useEffect } from "react";
+import { useAtomValue, Provider as JotaiProvider, atom, useAtom } from "jotai";
 import {
   Chart,
   DimensionSelect,
@@ -16,7 +16,7 @@ import {
 
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Button } from "@/components/ui/button";
-import { SquareArrowOutUpRight } from "lucide-react";
+import { SquareArrowOutUpRight, X } from "lucide-react";
 
 const hasChoices = (name, dataProps, analysis) => {
   const values = dataProps[name];
@@ -26,6 +26,34 @@ const hasChoices = (name, dataProps, analysis) => {
     return false;
   return true;
 };
+
+const showInstructionsAtom = atom(true);
+
+function MiniPortalInstructions() {
+  const [show, setShow] = useAtom(showInstructionsAtom);
+  const selectedGeographies = useAtomValue(selectedGeographiesAtom);
+  const mapCatalogQuery = useAtomValue(catalogQueriesAtom).getMapCatalogQuery();
+  const gridLabel = mapCatalogQuery.dataset.grid.label.toLowerCase();
+
+  useEffect(() => {
+    if (selectedGeographies.length) setShow(false);
+  }, [selectedGeographies]);
+
+  return show ? (
+    <div className="absolute top-3 left-[25%] right-[25%] py-2 px-4 text-sm bg-sidebar/90 rounded flex gap-3 items-center">
+      <span>
+        Click the map to select a {gridLabel} and view a time series chart.
+      </span>
+      <Button
+        variant="ghost"
+        aria-description="Close"
+        onClick={() => setShow(false)}
+      >
+        <X />
+      </Button>
+    </div>
+  ) : null;
+}
 
 function MiniPortalToolbar({ title, ...dataProps }) {
   const analysis = useAtomValue(analysisAtom);
@@ -81,7 +109,10 @@ function MiniPortalContent({ title, ...dataProps }) {
     <div className="border bg-popover mb-6">
       <Suspense>
         <MiniPortalToolbar title={title} {...dataProps} />
-        <Map className="h-125 max-h-[40vh]" />
+        <div className="h-125 max-h-[40vh] relative">
+          <Map className="h-125 max-h-[40vh]" />
+          <MiniPortalInstructions />
+        </div>
       </Suspense>
       <Suspense>
         {selectedGeographies.length > 0 && (
