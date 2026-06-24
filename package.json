@@ -15,7 +15,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@cpra/mp-ui": "^0.3.1",
+    "@cpra/mp-ui": "^0.4.0",
     "@docusaurus/core": "^3.10.0",
     "@docusaurus/faster": "^3.10.0",
     "@docusaurus/preset-classic": "^3.10.0",

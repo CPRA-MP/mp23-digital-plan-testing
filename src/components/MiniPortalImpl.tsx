@@ -16,7 +16,20 @@ import {
 
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Button } from "@/components/ui/button";
-import { Menu, SquareArrowOutUpRight, X } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Layers, Menu, SquareArrowOutUpRight, X } from "lucide-react";
+
+const defaultProjectModelGroups = [
+  [0, "Existing Conditions"],
+  [700, "Initial Conditions"],
+  [701, "All Candidate Projects"],
+  [702, "Projects in Engineering and Design"],
+];
 
 const hasChoices = (name, dataProps, analysis) => {
   const values = dataProps[name];
@@ -55,7 +68,43 @@ function MiniPortalInstructions() {
   ) : null;
 }
 
-function MiniPortalToolbar({ title, ...dataProps }) {
+function MapOptionsPopover({
+  projectModelGroups,
+  checked,
+  onToggle,
+  showLabel = false,
+}) {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" title="Map options">
+          <Layers />
+          {showLabel && "Layers"}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <span className="font-medium">Projects</span>
+        {projectModelGroups.map(([value, label]) => (
+          <label key={value} className="flex items-center gap-2">
+            <Checkbox
+              checked={checked.has(value)}
+              onCheckedChange={() => onToggle(value)}
+            />
+            {label}
+          </label>
+        ))}
+      </PopoverContent>
+    </Popover>
+  );
+}
+
+function MiniPortalToolbar({
+  title,
+  projectModelGroups,
+  checkedModelGroups,
+  onToggleModelGroup,
+  ...dataProps
+}) {
   const [open, setOpen] = useState(false);
   const [narrow, setNarrow] = useState(false);
   const timeSelectRef = useRef<HTMLDivElement>(null);
@@ -116,6 +165,22 @@ function MiniPortalToolbar({ title, ...dataProps }) {
     ),
   );
 
+  const mapOptions = (
+    <MapOptionsPopover
+      projectModelGroups={projectModelGroups}
+      checked={checkedModelGroups}
+      onToggle={onToggleModelGroup}
+    />
+  );
+  const mapOptionsMobile = (
+    <MapOptionsPopover
+      projectModelGroups={projectModelGroups}
+      checked={checkedModelGroups}
+      onToggle={onToggleModelGroup}
+      showLabel
+    />
+  );
+
   const portalLink = (
     <Button
       asChild
@@ -140,6 +205,7 @@ function MiniPortalToolbar({ title, ...dataProps }) {
         <div ref={timeSelectRef} className="flex-1 min-w-0 flex items-center">
           <TimeSelect showSelectionMode={false} />
         </div>
+        {mapOptions}
         {portalLink}
       </div>
       {/* Narrow bar — overlays the wide toolbar when narrow */}
@@ -172,6 +238,7 @@ function MiniPortalToolbar({ title, ...dataProps }) {
           </div>
           {dimensionSelectsMobile}
           <TimeSelect showSelectionMode={false} />
+          {mapOptionsMobile}
           <Button
             asChild
             className="no-underline"
@@ -189,15 +256,37 @@ function MiniPortalToolbar({ title, ...dataProps }) {
   );
 }
 
-function MiniPortalContent({ title, ...dataProps }) {
+function MiniPortalContent({ title, projectModelGroups, ...dataProps }) {
   const selectedGeographies = useAtomValue(selectedGeographiesAtom);
+  const [checkedModelGroups, setCheckedModelGroups] = useState(
+    () => new Set(projectModelGroups.map(([value]) => value)),
+  );
+
+  const toggleModelGroup = (value) =>
+    setCheckedModelGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(value)) next.delete(value);
+      else next.add(value);
+      return next;
+    });
+
+  const styleParams = Array.from(checkedModelGroups).map((value) => [
+    "projects_model_group_id",
+    value,
+  ]);
 
   return (
     <div className="relative border bg-popover mb-6">
       <Suspense>
-        <MiniPortalToolbar title={title} {...dataProps} />
+        <MiniPortalToolbar
+          title={title}
+          projectModelGroups={projectModelGroups}
+          checkedModelGroups={checkedModelGroups}
+          onToggleModelGroup={toggleModelGroup}
+          {...dataProps}
+        />
         <div className="h-125 max-h-[40vh] relative">
-          <Map className="h-125 max-h-[40vh]" />
+          <Map className="h-125 max-h-[40vh]" styleParams={styleParams} />
           <MiniPortalInstructions />
         </div>
       </Suspense>
@@ -212,7 +301,11 @@ function MiniPortalContent({ title, ...dataProps }) {
   );
 }
 
-export default function MiniPortalImpl({ title, ...dataProps }) {
+export default function MiniPortalImpl({
+  title,
+  projectModelGroups = defaultProjectModelGroups,
+  ...dataProps
+}) {
   const analysis = useAtomValue(analysisAtom);
   const filteredDataProps = Object.fromEntries(
     Object.entries(dataProps).filter(
@@ -224,7 +317,11 @@ export default function MiniPortalImpl({ title, ...dataProps }) {
     <JotaiProvider store={store}>
       <ScopeDataProvider {...filteredDataProps}>
         <ThemeProvider>
-          <MiniPortalContent title={title} {...dataProps} />
+          <MiniPortalContent
+            title={title}
+            projectModelGroups={projectModelGroups}
+            {...dataProps}
+          />
         </ThemeProvider>
       </ScopeDataProvider>
     </JotaiProvider>
