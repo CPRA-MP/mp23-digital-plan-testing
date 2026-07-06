@@ -20,3 +20,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /scratch
+
+# playwright-cli scratch output (screenshots, console logs, snapshots)
+/.playwright-cli
