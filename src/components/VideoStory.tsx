@@ -1,4 +1,11 @@
-import { ReactNode, useRef, useLayoutEffect } from "react";
+import {
+  ReactNode,
+  useRef,
+  useLayoutEffect,
+  Children,
+  cloneElement,
+  isValidElement,
+} from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -95,7 +102,7 @@ export default function VideoStory({
 
   return (
     <div className="w-dvw cursor-grab select-none" ref={containerRef}>
-      <div className="bg-white w-dvw overflow-hidden sticky top-(--header-height) z-1">
+      <div className="bg-[#006B67] w-dvw overflow-hidden sticky top-(--header-height) z-1">
         <video
           src={src}
           playsInline={true}
@@ -109,7 +116,22 @@ export default function VideoStory({
           ref={mergeRefs<HTMLVideoElement>([videoRef, measureRef])}
         ></video>
       </div>
-      {children}
+      {Children.map(children, (child, index) =>
+        index === 0 && isValidElement(child)
+          ? cloneElement(
+              child as React.ReactElement<{
+                className?: string;
+                brief?: boolean;
+              }>,
+              {
+                className: `mt-[calc(var(--page-height)*-1)] ${
+                  (child.props as { className?: string }).className ?? ""
+                }`,
+                brief: true,
+              },
+            )
+          : child,
+      )}
     </div>
   );
 }

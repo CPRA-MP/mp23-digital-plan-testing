@@ -11,12 +11,7 @@ import StoryPage from "../components/StoryPage";
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header
-      className={clsx(
-        "hero hero--primary h-(--page-height)",
-        styles.heroBanner,
-      )}
-    >
+    <header>
       <div className="container">
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
@@ -31,9 +26,11 @@ export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
-      <HomepageHeader />
       <main id="overview">
-        <VideoStory src="https://api.mpdp.coastal.la.gov/static/video/placeholder-prototype-10fps-extended-20260623.mp4">
+        <VideoStory src="https://api.mpdp.coastal.la.gov/static/video/placeholder-prototype-10fps-extended-1-1ratio.mp4">
+          <StoryPage>
+            <HomepageHeader />
+          </StoryPage>
           <StoryPage>
             <h2>Page 1</h2>
             <p>
