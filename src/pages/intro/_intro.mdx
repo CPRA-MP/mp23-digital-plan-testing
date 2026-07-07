@@ -1,4 +1,5 @@
 import StoryPage from '@site/src/components/StoryPage';
+import StoryLabel from '@site/src/components/StoryLabel';
 
 import OpeningPurposeAndContext from './_01-opening-purpose-and-context.md';
 import ContextHowCoastalLouisianaWasShaped from './_02-context-how-coastal-louisiana-was-shaped.md';
@@ -26,6 +27,17 @@ import Y2070 from './_23-2070.md';
 import Y2080 from './_24-2080.md';
 import CallToAction from './_25-call-to-action.md';
 
+{/* The frame numbers below are rough placeholders spacing labels evenly across the
+placeholder video's ~392 frames (10fps, ~39s) — recalibrate once the real footage
+and its actual per-page scroll timing are final. StoryLabel is placed as a sibling
+of StoryPage, not nested inside it — StoryPage's sticky content box is translated
+with a CSS transform, which would turn it into the containing block for a nested
+StoryLabel's fixed positioning and break its viewport-relative placement. */}
+
+<StoryLabel startFrame={0} endFrame={20} style={{ top: "80px", bottom: "auto", left: "5dvw", right: "auto", background: "white", color: "black" }}>
+  SCROLL TO BEGIN
+</StoryLabel>
+
 <StoryPage first>
   <OpeningPurposeAndContext />
 </StoryPage>
@@ -33,6 +45,12 @@ import CallToAction from './_25-call-to-action.md';
 <StoryPage>
   <ContextHowCoastalLouisianaWasShaped />
 </StoryPage>
+
+{/* pan lets a label track a specific feature in the video as the user drags it,
+instead of staying pinned to a screen corner like the default */}
+<StoryLabel startFrame={32} endFrame={48} pan style={{ top: "120px", bottom: "auto", left: "10dvw", right: "auto" }}>
+  MISSISSIPPI RIVER DELTA
+</StoryLabel>
 
 <StoryPage>
   <FormationOfSouthLouisiana />
@@ -50,37 +68,55 @@ import CallToAction from './_25-call-to-action.md';
   <HistoricalLandChange />
 </StoryPage>
 
+<StoryLabel startFrame={96} endFrame={112}>2024</StoryLabel>
+
 <StoryPage>
   <Y2024CurrentConditions />
 </StoryPage>
+
+<StoryLabel startFrame={112} endFrame={128}>1932</StoryLabel>
 
 <StoryPage>
   <Y1932StartingLandscape />
 </StoryPage>
 
+<StoryLabel startFrame={128} endFrame={144}>1956</StoryLabel>
+
 <StoryPage>
   <Y1956SeeingTheChanges />
 </StoryPage>
+
+<StoryLabel startFrame={144} endFrame={160}>1975</StoryLabel>
 
 <StoryPage>
   <Y1975 />
 </StoryPage>
 
+<StoryLabel startFrame={160} endFrame={176}>1985</StoryLabel>
+
 <StoryPage>
   <Y1985ImpactsOfIndustry />
 </StoryPage>
+
+<StoryLabel startFrame={176} endFrame={192}>1995</StoryLabel>
 
 <StoryPage>
   <Y1995StormImpactsAndEmergingEfforts />
 </StoryPage>
 
+<StoryLabel startFrame={192} endFrame={208}>2006</StoryLabel>
+
 <StoryPage>
   <Y2006Post2005StormsAndCoastalPlanningShifts />
 </StoryPage>
 
+<StoryLabel startFrame={208} endFrame={224}>2015</StoryLabel>
+
 <StoryPage>
   <Y2015 />
 </StoryPage>
+
+<StoryLabel startFrame={224} endFrame={240}>2024</StoryLabel>
 
 <StoryPage>
   <BackTo2024CurrentConditions />
@@ -98,25 +134,37 @@ import CallToAction from './_25-call-to-action.md';
   <ReadingProjectedChangeAndConfidence />
 </StoryPage>
 
+<StoryLabel startFrame={288} endFrame={304}>2030</StoryLabel>
+
 <StoryPage>
   <Y2030 />
 </StoryPage>
+
+<StoryLabel startFrame={304} endFrame={320}>2040</StoryLabel>
 
 <StoryPage>
   <Y2040 />
 </StoryPage>
 
+<StoryLabel startFrame={320} endFrame={336}>2050</StoryLabel>
+
 <StoryPage>
   <Y2050 />
 </StoryPage>
+
+<StoryLabel startFrame={336} endFrame={352}>2060</StoryLabel>
 
 <StoryPage>
   <Y2060 />
 </StoryPage>
 
+<StoryLabel startFrame={352} endFrame={368}>2070</StoryLabel>
+
 <StoryPage>
   <Y2070 />
 </StoryPage>
+
+<StoryLabel startFrame={368} endFrame={384}>2080</StoryLabel>
 
 <StoryPage>
   <Y2080 />

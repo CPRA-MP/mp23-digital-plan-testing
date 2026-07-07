@@ -1,9 +1,16 @@
 import { ReactNode, useLayoutEffect, useRef, useState } from "react";
 import useMeasure from "react-use-measure";
 
+/** How many video frames of resting time fit into one page-height's worth of extra
+ * scroll. Only matters when startFrame/endFrame are given — raise it to make a given
+ * frame range cover less scroll distance (faster pacing), lower it for more. */
+const FRAMES_PER_PAGE_HEIGHT = 100;
+
 export default function StoryPage({
   children,
   first = false,
+  startFrame,
+  endFrame,
 }: {
   children: ReactNode;
   /** Marks the page that's already visible on load, sitting over the video's first
@@ -16,6 +23,14 @@ export default function StoryPage({
    * the wrapper's bottom-edge clamp — so there's no dead zone where it sits
    * centered before scroll starts moving it. */
   first?: boolean;
+  /** The video frame at which this page's content reaches its resting position,
+   * vertically centered on the screen. Together with endFrame this sets how much
+   * scroll distance the page holds still for before it starts leaving. Omit both to
+   * keep the previous fixed page length. */
+  startFrame?: number;
+  /** The video frame at which this page's content starts scrolling upward off the
+   * screen, ending the hold that began at startFrame. */
+  endFrame?: number;
 }) {
   const pageRef = useRef<HTMLDivElement>(null);
   const [boxRef, bounds] = useMeasure();
@@ -32,6 +47,11 @@ export default function StoryPage({
     return () => window.removeEventListener("resize", recompute);
   }, [first, bounds.height]);
 
+  const hold =
+    startFrame != null && endFrame != null
+      ? (endFrame - startFrame) / FRAMES_PER_PAGE_HEIGHT
+      : 0.5;
+
   const stickyBox = (
     <div
       ref={first ? boxRef : undefined}
@@ -43,7 +63,8 @@ export default function StoryPage({
   return (
     <div
       ref={first ? pageRef : undefined}
-      className={`relative z-100 h-[calc(2*var(--page-height))] pb-[calc(0.5*var(--page-height))] ${
+      style={{ height: `calc((1.5 + ${hold}) * var(--page-height))` }}
+      className={`relative z-100 pb-[calc(0.5*var(--page-height))] ${
         first ? "mt-[calc(var(--page-height)*-1)]" : ""
       }`}
     >
