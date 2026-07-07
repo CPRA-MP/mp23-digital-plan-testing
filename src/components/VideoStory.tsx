@@ -94,7 +94,10 @@ export default function VideoStory({
         trigger: containerRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: true,
+        // A number (rather than `true`) eases currentTime toward the scroll
+        // target over this many seconds instead of snapping to it every tick,
+        // coalescing seeks and smoothing out raw scroll jitter.
+        scrub: 0.5,
       },
     });
 
