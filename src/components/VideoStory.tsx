@@ -1,11 +1,4 @@
-import {
-  ReactNode,
-  useRef,
-  useLayoutEffect,
-  Children,
-  cloneElement,
-  isValidElement,
-} from "react";
+import { ReactNode, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -116,22 +109,7 @@ export default function VideoStory({
           ref={mergeRefs<HTMLVideoElement>([videoRef, measureRef])}
         ></video>
       </div>
-      {Children.map(children, (child, index) =>
-        index === 0 && isValidElement(child)
-          ? cloneElement(
-              child as React.ReactElement<{
-                className?: string;
-                brief?: boolean;
-              }>,
-              {
-                className: `mt-[calc(var(--page-height)*-1)] ${
-                  (child.props as { className?: string }).className ?? ""
-                }`,
-                brief: true,
-              },
-            )
-          : child,
-      )}
+      {children}
     </div>
   );
 }
