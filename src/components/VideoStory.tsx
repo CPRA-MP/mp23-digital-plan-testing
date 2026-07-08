@@ -1,6 +1,7 @@
 import {
   ReactNode,
   useRef,
+  useEffect,
   useLayoutEffect,
   useCallback,
   createContext,
@@ -21,6 +22,12 @@ export type StoryLabelEntry = {
   /** Whether this label should shift horizontally in lockstep with the video as the
    * user drags/pans it, instead of staying fixed on screen. */
   pan: boolean;
+  /** When panning, pin to the screen edge and show a triangle instead of letting the
+   * label slide off screen once its anchor point leaves the viewport. */
+  edgeArrow: boolean;
+  /** Last translateX (px) applied by positionLabel, so the untransformed home
+   * position can be recovered from getBoundingClientRect on the next tick. */
+  tx?: number;
 };
 
 /** Lets a StoryLabel anywhere in the tree register itself so VideoStory can toggle
@@ -47,28 +54,65 @@ export default function VideoStory({
   const labelsRef = useRef(new Set<StoryLabelEntry>());
   const panOffsetRef = useRef(0);
 
+  // Horizontally place one label for the current pan offset. Plain pan labels just
+  // track the video; edgeArrow labels clamp to the viewport edge and flip on a
+  // triangle (via data-arrow) once their anchor point pans out of view.
+  const positionLabel = useCallback((label: StoryLabelEntry) => {
+    if (!label.pan) return;
+    const change = panOffsetRef.current;
+    if (!label.edgeArrow) {
+      label.el.style.transform = `translateX(${change}px)`;
+      return;
+    }
+    // getBoundingClientRect reflects the transform we last applied; subtracting that
+    // recovers the untransformed home position without a separate cache (and stays
+    // correct across resizes, since the rect is re-read each time).
+    const rect = label.el.getBoundingClientRect();
+    if (rect.width === 0) return; // hidden (display:none) — geometry not meaningful yet
+    const homeLeft = rect.left - (label.tx ?? 0);
+    const width = rect.width;
+    const vw = document.documentElement.clientWidth;
+    const pad = 16; // leaves room for the ~12px triangle to stay on screen
+    const anchorX = homeLeft + width / 2 + change;
+
+    let tx: number;
+    let arrow = "";
+    if (anchorX < 0) {
+      tx = pad - homeLeft;
+      arrow = "left";
+    } else if (anchorX > vw) {
+      tx = vw - pad - width - homeLeft;
+      arrow = "right";
+    } else {
+      tx = change;
+    }
+    label.tx = tx;
+    label.el.style.transform = `translateX(${tx}px)`;
+    label.el.dataset.arrow = arrow;
+  }, []);
+
   const updateLabels = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
     const frame = video.currentTime * fps;
     for (const label of labelsRef.current) {
-      label.el.style.display =
-        frame >= label.startFrame && frame < label.endFrame ? "" : "none";
+      const visible = frame >= label.startFrame && frame < label.endFrame;
+      label.el.style.display = visible ? "" : "none";
+      // Reposition on reveal so a label uncovered mid-pan lands at the right spot.
+      if (visible) positionLabel(label);
     }
-  }, [fps]);
+  }, [fps, positionLabel]);
 
   const registerLabel = useCallback(
     (entry: StoryLabelEntry) => {
       labelsRef.current.add(entry);
       updateLabels();
-      entry.el.style.transform = entry.pan
-        ? `translateX(${panOffsetRef.current}px)`
-        : "";
+      positionLabel(entry);
       return () => {
         labelsRef.current.delete(entry);
       };
     },
-    [updateLabels],
+    [updateLabels, positionLabel],
   );
 
   useGSAP(() => {
@@ -157,12 +201,19 @@ export default function VideoStory({
         slider.style.cursor = "grabbing";
         video.style.marginLeft = `${change}px`;
         panOffsetRef.current = change;
-        for (const label of labelsRef.current) {
-          if (label.pan) label.el.style.transform = `translateX(${change}px)`;
-        }
+        for (const label of labelsRef.current) positionLabel(label);
       });
     }
-  }, []);
+  }, [positionLabel]);
+
+  // A resize changes which anchors are off screen, so re-clamp every label.
+  useEffect(() => {
+    const onResize = () => {
+      for (const label of labelsRef.current) positionLabel(label);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [positionLabel]);
 
   return (
     <div className="w-dvw cursor-grab select-none" ref={containerRef}>
