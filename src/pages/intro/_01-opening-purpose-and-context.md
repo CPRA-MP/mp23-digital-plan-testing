@@ -1,5 +1,9 @@
+<div className="left">
+
 # The Current Outlook
 <span className="subtitle">Louisiana's Coast in a Future Without Action</span>
+
+</div>
 
 <div className="right">
 Coastal Louisiana is dynamic, shaped by transition and adaptation. As part of the development of Louisiana’s 2029 Coastal Master Plan, this site was created to place coastal data in context to help visitors understand how the coast has changed and how it may continue to evolve over time.
