@@ -11,6 +11,7 @@ export default function StoryPage({
   first = false,
   startFrame,
   endFrame,
+  className = "",
 }: {
   children: ReactNode;
   /** Marks the page that's already visible on load, sitting over the video's first
@@ -31,6 +32,9 @@ export default function StoryPage({
   /** The video frame at which this page's content starts scrolling upward off the
    * screen, ending the hold that began at startFrame. */
   endFrame?: number;
+  /** Extra classes appended after the inner wrapper's default styles, so they
+   * can add to or override them. */
+  className?: string;
 }) {
   const pageRef = useRef<HTMLDivElement>(null);
   const [boxRef, bounds] = useMeasure();
@@ -58,7 +62,9 @@ export default function StoryPage({
       ref={first ? boxRef : undefined}
       className="sticky top-[50%] translate-y-[-50%]"
     >
-      <div className=" bg-[#ffffffe0] text-black w-[40dvw] max-w-150 ml-[5dvw] p-3 cursor-auto [&>h2]:uppercase [&>h2]:text-lg [&>p]:leading-5 [&>*:last-child]:mb-0">
+      <div
+        className={`bg-[#ffffffe0] text-black w-[60dvw] sm:w-[40dvw] max-w-150 ml-[5dvw] p-3 md:p-4 lg:p-6 cursor-auto text-sm md:text-base lg:text-lg [&_h2]:uppercase [&_h2]:text-lg md:[&_h2]:text-xl lg:[&_h2]:text-2xl [&_p]:leading-5 [&_*:last-child]:mb-0 ${className}`}
+      >
         {children}
       </div>
     </div>
