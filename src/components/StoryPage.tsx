@@ -39,7 +39,8 @@ export default function StoryPage({
   useLayoutEffect(() => {
     if (!first || !bounds.height) return;
     function recompute() {
-      const docTop = pageRef.current!.getBoundingClientRect().top + window.scrollY;
+      const docTop =
+        pageRef.current!.getBoundingClientRect().top + window.scrollY;
       setWrapperHeight(window.innerHeight / 2 - docTop + bounds.height);
     }
     recompute();
@@ -55,9 +56,11 @@ export default function StoryPage({
   const stickyBox = (
     <div
       ref={first ? boxRef : undefined}
-      className="sticky top-[50%] translate-y-[-50%] bg-[#ffffffe0] text-black w-[40dvw] ml-[5dvw] p-3 cursor-auto [&>h2]:uppercase [&>h2]:text-lg [&>p]:leading-5 [&>*:last-child]:mb-0"
+      className="sticky top-[50%] translate-y-[-50%]"
     >
-      {children}
+      <div className=" bg-[#ffffffe0] text-black w-[40dvw] max-w-150 ml-[5dvw] p-3 cursor-auto [&>h2]:uppercase [&>h2]:text-lg [&>p]:leading-5 [&>*:last-child]:mb-0">
+        {children}
+      </div>
     </div>
   );
   return (
