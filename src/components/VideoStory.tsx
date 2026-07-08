@@ -132,12 +132,14 @@ export default function VideoStory({
       const slider = containerRef.current;
 
       let isDown = false;
-      let startX;
+      let startX = 0;
+      let startOffset = 0;
 
-      // Start dragging: record initial mouse position and scroll state
+      // Start dragging: record initial pointer position and current pan offset.
       slider.addEventListener("pointerdown", (e) => {
         isDown = true;
-        startX = e.pageX - video.offsetLeft;
+        startX = e.pageX;
+        startOffset = panOffsetRef.current;
       });
 
       // End dragging: clear state
@@ -150,15 +152,21 @@ export default function VideoStory({
         slider.style.cursor = "grab";
       });
 
-      // Perform scrolling: update scroll position based on mouse movement
+      // Perform scrolling: update scroll position based on mouse movement.
+      // The offset is the pan applied before this drag plus how far the pointer has
+      // moved since pointerdown, so a new drag continues from where the last one left
+      // off instead of snapping to a value derived from the video's (unrelated)
+      // centering margin. Applied as a transform rather than overwriting the video's
+      // centering `marginLeft`, so it doesn't fight with that style.
       slider.addEventListener("pointermove", (e) => {
         const change = e.pageX - startX;
         if (!isDown || Math.abs(change) < 5) return;
         slider.style.cursor = "grabbing";
-        video.style.marginLeft = `${change}px`;
-        panOffsetRef.current = change;
+        const offset = startOffset + change;
+        video.style.transform = `translateX(${offset}px)`;
+        panOffsetRef.current = offset;
         for (const label of labelsRef.current) {
-          if (label.pan) label.el.style.transform = `translateX(${change}px)`;
+          if (label.pan) label.el.style.transform = `translateX(${offset}px)`;
         }
       });
     }
