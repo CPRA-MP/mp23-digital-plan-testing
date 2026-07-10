@@ -63,7 +63,7 @@ export default function StoryPage({
       className="sticky top-[50%] translate-y-[-50%]"
     >
       <div
-        className={`bg-[#ffffffe0] text-black w-[60dvw] sm:w-[40dvw] max-w-150 ml-[5dvw] p-3 md:p-4 lg:p-6 cursor-auto text-sm md:text-base lg:text-lg [&_h2]:uppercase [&_h2]:text-lg md:[&_h2]:text-xl lg:[&_h2]:text-2xl [&_p]:leading-5 [&_*:last-child]:mb-0 ${className}`}
+        className={`bg-white text-black w-[60dvw] sm:w-[40dvw] max-w-150 ml-[5dvw] p-3 md:p-4 lg:p-6 cursor-auto text-sm md:text-base lg:text-lg [&_h2]:uppercase [&_h2]:text-lg md:[&_h2]:text-xl lg:[&_h2]:text-2xl [&_p]:leading-5 [&_*:last-child]:mb-0 ${className}`}
       >
         {children}
       </div>
