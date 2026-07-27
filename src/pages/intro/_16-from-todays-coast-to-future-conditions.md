@@ -1,3 +1,3 @@
 ## From Today’s Coast to Future Conditions
 
-Coastal planning takes into account the coast as it exists today, but also requires looking ahead. Future projections help explore how the landscape, flood risk, and environmental conditions may continue to change over time. This provides an important bridge between observations of today’s coast and the decisions being considered to manage it into the future through the Coastal Master Plan.
+Future conditions build on the coast that exists today. The same processes and decisions that shaped current land, water, infrastructure, and community patterns will continue to influence future outcomes.

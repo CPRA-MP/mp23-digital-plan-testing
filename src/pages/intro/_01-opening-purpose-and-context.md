@@ -6,9 +6,9 @@
 </div>
 
 <div className="right">
-Coastal Louisiana is dynamic, shaped by transition and adaptation. As part of the development of Louisiana’s 2029 Coastal Master Plan, this site was created to place coastal data in context to help visitors understand how the coast has changed and how it may continue to evolve over time.
+Coastal Louisiana is dynamic, shaped by the ongoing interaction of natural processes, changing environmental conditions, and human actions.
 
-Through a combination of historical data, present-day conditions, and future projections, this site outlines the forces that contribute to coastal challenges, including land loss, storm surge-based flood risk, and environmental change across South Louisiana.
+As part of the development of Louisiana’s 2029 Coastal Master Plan (MP29), this site was created to place MP29 analysis in context. It is intended to illustrate how the coast has changed, how it functions today, and how future coastal conditions may be affected by restoration, risk reduction, and adaptation decisions.
 
-These insights are designed to support informed conversations and local and regional decision-making. They also help guide the development of projects aimed at reducing risk and strengthening the Louisiana coast for future generations.
+Through a combination of historical information, present-day conditions, and future projections, this site explores the forces that shape coastal Louisiana and uses timeline markers as context for changes to land, water, habitats, flood risk*, and communities*.
 </div>

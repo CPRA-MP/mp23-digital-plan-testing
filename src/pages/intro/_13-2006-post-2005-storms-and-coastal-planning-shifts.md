@@ -1,7 +1,5 @@
 ## 2006 Post-2005 Storms and Coastal Planning Shifts
 
-This map reflects coastal conditions after the 2005 storm season, when Hurricanes Katrina and Rita caused widespread damage and destruction, including 217 sq mi of storm-driven land loss.
+Hurricanes Katrina and Rita provide important context for this period by showing the connections among land loss, storm surge, community risk, infrastructure, ecosystems, and the economy.
 
-The impacts of these storms inspired change in how the State addressed coastal risk and restoration needs, leading to the creation of CPRA and a mandate to develop a comprehensive Coastal Master Plan.
-
-Map observation placeholder: [Add text describing the most apparent post-Katrina and Rita changes visible on the 2006 map, such as newly open water, wetland break-up, etc.]
+The response to those storms changed how Louisiana organized coastal work. CPRA was formed, the first comprehensive master plan was approved, and restoration and risk-reduction planning became more directly linked through projects and studies across the coast.
