@@ -6,9 +6,11 @@
 </div>
 
 <div className="right">
-Coastal Louisiana is dynamic, shaped by the ongoing interaction of natural processes, changing environmental conditions, and human actions.
+Coastal Louisiana has always been shaped by natural processes, storms, and human decisions about how land, water, infrastructure, and flood risk are managed. These forces continue to affect the landscape and how communities plan for the future.
 
-As part of the development of Louisiana’s 2029 Coastal Master Plan (MP29), this site was created to place MP29 analysis in context. It is intended to illustrate how the coast has changed, how it functions today, and how future coastal conditions may be affected by restoration, risk reduction, and adaptation decisions.
+We can use historical maps and observations to understand how the coast has changed in the past. To explore how it may change in the future, CPRA uses predictive models as part of the 2029 Coastal Master Plan (MP29). These models test different scenarios, or sets of assumptions, based on possible future environmental conditions and planning decisions.
 
-Through a combination of historical information, present-day conditions, and future projections, this site explores the forces that shape coastal Louisiana and uses timeline markers as context for changes to land, water, habitats, flood risk*, and communities*.
+One important scenario, called Future Without Action (FWOA), illustrates how coastal Louisiana may change if no additional restoration or risk-reduction projects are built. This site presents MP29 FWOA results as one possible future for coastal Louisiana and as a tool to support coastwide planning.
+
+Continue scrolling to learn more.
 </div>

@@ -3,40 +3,38 @@ import StoryTitlePage from '@site/src/components/StoryTitlePage';
 import StoryLabel from '@site/src/components/StoryLabel';
 
 import OpeningPurposeAndContext from './_01-opening-purpose-and-context.md';
-import FutureWithoutActionAReferenceForFutureChange from './_02-future-without-action-a-reference-for-future-change.md';
-import ContextHowCoastalLouisianaWasShaped from './_03-context-how-coastal-louisiana-was-shaped.md';
-import FormationOfSouthLouisiana from './_04-formation-of-south-louisiana.md';
-import LivingWithWater from './_05-living-with-water.md';
-import ManagingWaterAndTheCoast from './_06-managing-water-and-the-coast.md';
-import HistoricalLandChange from './_07-historical-land-change.md';
-import ReadingTheCurvesAlongsideTheMaps from './_08-reading-the-curves-alongside-the-maps.md';
-import Y1932StartingLandscape from './_09-1932-starting-landscape.md';
-import Y1956SeeingTheChanges from './_10-1956-seeing-the-changes.md';
-import Y1975 from './_11-1975.md';
-import Y1985To1995RegionalLandLossAndOrganizedRestoration from './_12-1985-1995-regional-land-loss-and-organized-restoration.md';
-import Y2006Post2005StormsAndCoastalPlanningShifts from './_13-2006-post-2005-storms-and-coastal-planning-shifts.md';
-import Y2015 from './_14-2015.md';
-import BackTo2024CurrentConditions from './_15-back-to-2024-current-conditions.md';
-import FromTodaysCoastToFutureConditions from './_16-from-todays-coast-to-future-conditions.md';
-import UnderstandingAFutureWithoutAction from './_17-understanding-a-future-without-action.md';
-import ReadingProjectedChangeAndConfidence from './_18-reading-projected-change-and-confidence.md';
-import Y2030 from './_19-2030.md';
-import Y2040 from './_20-2040.md';
-import Y2050 from './_21-2050.md';
-import Y2060 from './_22-2060.md';
-import Y2070 from './_23-2070.md';
-import Y2080 from './_24-2080.md';
-import KeyTakeawayChangeBuildsOverTime from './_25-key-takeaway-change-builds-over-time.md';
-import CallToAction from './_26-call-to-action.md';
+import FormationOfSouthLouisiana from './_02-formation-of-south-louisiana.md';
+import ManagingWaterAndTheCoast from './_03-managing-water-and-the-coast.md';
+import VisualizingCoastalChange from './_04-visualizing-coastal-change.md';
+import MappingLandAndWater from './_05-mapping-land-and-water.md';
+import HistoricalLandChange from './_06-historical-land-change.md';
+import Y2024CurrentConditions from './_07-2024-current-conditions.md';
+import UnderstandingAFutureWithoutAction from './_08-understanding-a-future-without-action.md';
+import CoastwideSummary from './_09-coastwide-summary.md';
+import HowToUseFwoaResults from './_10-how-to-use-fwoa-results.md';
+import Y2030 from './_11-2030.md';
+import Y2040 from './_12-2040.md';
+import Y2050 from './_13-2050.md';
+import Y2060 from './_14-2060.md';
+import Y2070 from './_15-2070.md';
+import Y2080 from './_16-2080.md';
+import KeyTakeawayChangeBuildsOverTime from './_17-key-takeaway-change-builds-over-time.md';
+import CallToAction from './_18-call-to-action.md';
 
-{/* The frame numbers below are rough placeholders spacing labels evenly across the
-placeholder video's ~392 frames (10fps, ~39s) — recalibrate once the real footage
-and its actual per-page scroll timing are final. StoryLabel is placed as a sibling
-of StoryPage, not nested inside it — StoryPage's sticky content box is translated
-with a CSS transform, which would turn it into the containing block for a nested
-StoryLabel's fixed positioning and break its viewport-relative placement. */}
+{/* The video scrubs linearly from its first frame to its last across the whole story's
+scroll height (~392 frames at 10fps, ~39s), so a label's frame window is really a
+scroll position — and every window shifts whenever a page is added or removed. Pages
+are NOT equal height either (StoryTitlePage differs from StoryPage, and a StoryPage
+given start/end frames holds longer), so don't recompute these by dividing 392 by the
+page count; that drifts a page or more by the end. The windows below were measured
+empirically against the running site — each is the frame range over which its page
+actually sits centered in the viewport. Re-measure the same way after any structural
+change. StoryLabel is placed as a sibling of StoryPage, not nested inside it —
+StoryPage's sticky content box is translated with a CSS transform, which would turn it
+into the containing block for a nested StoryLabel's fixed positioning and break its
+viewport-relative placement. */}
 
-<StoryLabel startFrame={0} endFrame={20} style={{ top: "80px", bottom: "auto", left: "5dvw", right: "auto", background: "white", color: "black" }}>
+<StoryLabel startFrame={0} endFrame={12} style={{ top: "80px", bottom: "auto", left: "5dvw", right: "auto", background: "white", color: "black" }}>
   SCROLL TO BEGIN
 </StoryLabel>
 
@@ -44,17 +42,9 @@ StoryLabel's fixed positioning and break its viewport-relative placement. */}
   <OpeningPurposeAndContext />
 </StoryTitlePage>
 
-<StoryPage>
-  <FutureWithoutActionAReferenceForFutureChange />
-</StoryPage>
-
-<StoryPage>
-  <ContextHowCoastalLouisianaWasShaped />
-</StoryPage>
-
 {/* pan lets a label track a specific feature in the video as the user drags it,
 instead of staying pinned to a screen corner like the default */}
-<StoryLabel startFrame={32} endFrame={48} pan style={{ top: "120px", bottom: "auto", left: "10dvw", right: "auto" }}>
+<StoryLabel startFrame={16} endFrame={30} pan style={{ top: "120px", bottom: "auto", left: "10dvw", right: "auto" }}>
   MISSISSIPPI RIVER DELTA
 </StoryLabel>
 
@@ -63,65 +53,45 @@ instead of staying pinned to a screen corner like the default */}
 </StoryPage>
 
 <StoryPage>
-  <LivingWithWater />
+  <ManagingWaterAndTheCoast />
 </StoryPage>
 
 <StoryPage>
-  <ManagingWaterAndTheCoast />
+  <VisualizingCoastalChange />
 </StoryPage>
+
+<StoryPage>
+  <MappingLandAndWater />
+</StoryPage>
+
+{/* The individual year pages are gone — the historical record is now a single page the
+reader scrolls the map through. The year markers stay, but instead of one label per page
+they tick in sequence across the video's historical footage, marking each map year as the
+century scrolls past. Keep them contiguous and in order: a gap would read as the timeline
+stalling. These windows track the VIDEO, not the page boundaries — the historical
+animation runs from frame 103 until the 2024 imagery appears at 193, which is far longer
+than the Historical Land Change page's own scroll window, so these labels deliberately
+carry over the pages that follow. The 90 frames are divided evenly, ~13 per year. The
+1985–1995 label from the old merged page is split back into separate 1985 and 1995
+markers, since there are no longer pages to merge. */}
+<StoryLabel startFrame={103} endFrame={116}>1932</StoryLabel>
+<StoryLabel startFrame={116} endFrame={129}>1956</StoryLabel>
+<StoryLabel startFrame={129} endFrame={142}>1975</StoryLabel>
+<StoryLabel startFrame={142} endFrame={154}>1985</StoryLabel>
+<StoryLabel startFrame={154} endFrame={167}>1995</StoryLabel>
+<StoryLabel startFrame={167} endFrame={180}>2006</StoryLabel>
+<StoryLabel startFrame={180} endFrame={193}>2015</StoryLabel>
 
 <StoryPage>
   <HistoricalLandChange />
 </StoryPage>
 
-<StoryPage>
-  <ReadingTheCurvesAlongsideTheMaps />
-</StoryPage>
-
-<StoryLabel startFrame={112} endFrame={128}>1932</StoryLabel>
+{/* Also video-locked: the 2024 imagery doesn't appear until frame 193, which lands on the
+How to Use FWOA Results page rather than the 2024 Current Conditions page. */}
+<StoryLabel startFrame={193} endFrame={213}>2024</StoryLabel>
 
 <StoryPage>
-  <Y1932StartingLandscape />
-</StoryPage>
-
-<StoryLabel startFrame={128} endFrame={144}>1956</StoryLabel>
-
-<StoryPage>
-  <Y1956SeeingTheChanges />
-</StoryPage>
-
-<StoryLabel startFrame={144} endFrame={160}>1975</StoryLabel>
-
-<StoryPage>
-  <Y1975 />
-</StoryPage>
-
-<StoryLabel startFrame={160} endFrame={192}>1985–1995</StoryLabel>
-
-<StoryPage>
-  <Y1985To1995RegionalLandLossAndOrganizedRestoration />
-</StoryPage>
-
-<StoryLabel startFrame={192} endFrame={208}>2006</StoryLabel>
-
-<StoryPage>
-  <Y2006Post2005StormsAndCoastalPlanningShifts />
-</StoryPage>
-
-<StoryLabel startFrame={208} endFrame={224}>2015</StoryLabel>
-
-<StoryPage>
-  <Y2015 />
-</StoryPage>
-
-<StoryLabel startFrame={224} endFrame={240}>2024</StoryLabel>
-
-<StoryPage>
-  <BackTo2024CurrentConditions />
-</StoryPage>
-
-<StoryPage>
-  <FromTodaysCoastToFutureConditions />
+  <Y2024CurrentConditions />
 </StoryPage>
 
 <StoryPage>
@@ -129,40 +99,44 @@ instead of staying pinned to a screen corner like the default */}
 </StoryPage>
 
 <StoryPage>
-  <ReadingProjectedChangeAndConfidence />
+  <CoastwideSummary />
 </StoryPage>
 
-<StoryLabel startFrame={288} endFrame={304}>2030</StoryLabel>
+<StoryPage>
+  <HowToUseFwoaResults />
+</StoryPage>
+
+<StoryLabel startFrame={217} endFrame={233}>2030</StoryLabel>
 
 <StoryPage>
   <Y2030 />
 </StoryPage>
 
-<StoryLabel startFrame={304} endFrame={320}>2040</StoryLabel>
+<StoryLabel startFrame={239} endFrame={255}>2040</StoryLabel>
 
 <StoryPage>
   <Y2040 />
 </StoryPage>
 
-<StoryLabel startFrame={320} endFrame={336}>2050</StoryLabel>
+<StoryLabel startFrame={262} endFrame={278}>2050</StoryLabel>
 
 <StoryPage>
   <Y2050 />
 </StoryPage>
 
-<StoryLabel startFrame={336} endFrame={352}>2060</StoryLabel>
+<StoryLabel startFrame={283} endFrame={298}>2060</StoryLabel>
 
 <StoryPage>
   <Y2060 />
 </StoryPage>
 
-<StoryLabel startFrame={352} endFrame={368}>2070</StoryLabel>
+<StoryLabel startFrame={305} endFrame={321}>2070</StoryLabel>
 
 <StoryPage>
   <Y2070 />
 </StoryPage>
 
-<StoryLabel startFrame={368} endFrame={384}>2080</StoryLabel>
+<StoryLabel startFrame={327} endFrame={343}>2080</StoryLabel>
 
 <StoryPage>
   <Y2080 />
