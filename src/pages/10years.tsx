@@ -12,7 +12,7 @@ export default function Home(): ReactNode {
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <main id="overview">
-        <VideoStory src="https://api.mpdp.coastal.la.gov/static/video/intro-20260909-05years.mp4">
+        <VideoStory src="https://api.mpdp.coastal.la.gov/static/video/intro-20260909-10years.mp4">
           <MDXContent>
             <Intro />
           </MDXContent>
