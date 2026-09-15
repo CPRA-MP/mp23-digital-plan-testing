@@ -72,6 +72,7 @@ export default function StoryPage({
   return (
     <div
       ref={first ? pageRef : undefined}
+      data-story-page
       style={{ height: `calc((1.5 + ${hold}) * var(--page-height))` }}
       className={`relative z-100 pb-[calc(0.5*var(--page-height))] ${
         first ? "mt-[calc(var(--page-height)*-1)]" : ""
