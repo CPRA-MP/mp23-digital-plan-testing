@@ -1,0 +1,15 @@
+{
+  // MDX comments use JSX syntax: {/* ... */}. Zed's default Markdown/MDX
+  // formatter treats file prose as Markdown and normalizes *emphasis* to
+  // _emphasis_, which corrupts these comments into {/_ ... _/} and breaks
+  // MDX compilation. Format-on-save is disabled for these languages only;
+  // JS/TS/etc. formatting elsewhere is unaffected.
+  "languages": {
+    "MDX": {
+      "format_on_save": "off"
+    },
+    "Markdown": {
+      "format_on_save": "off"
+    }
+  }
+}

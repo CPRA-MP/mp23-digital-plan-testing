@@ -1,26 +1,26 @@
-import StoryPage from '@site/src/components/StoryPage';
-import StoryTitlePage from '@site/src/components/StoryTitlePage';
-import StoryCallToActionPage from '@site/src/components/StoryCallToActionPage';
-import StoryLabel from '@site/src/components/StoryLabel';
+import StoryPage from "@site/src/components/StoryPage";
+import StoryTitlePage from "@site/src/components/StoryTitlePage";
+import StoryCallToActionPage from "@site/src/components/StoryCallToActionPage";
+import StoryLabel from "@site/src/components/StoryLabel";
 
-import OpeningPurposeAndContext from './_01-opening-purpose-and-context.md';
-import FormationOfSouthLouisiana from './_02-formation-of-south-louisiana.md';
-import ManagingWaterAndTheCoast from './_03-managing-water-and-the-coast.md';
-import VisualizingCoastalChange from './_04-visualizing-coastal-change.md';
-import MappingLandAndWater from './_05-mapping-land-and-water.md';
-import HistoricalLandChange from './_06-historical-land-change.md';
-import Y2024CurrentConditions from './_07-2024-current-conditions.md';
-import UnderstandingAFutureWithoutAction from './_08-understanding-a-future-without-action.md';
-import CoastwideSummary from './_09-coastwide-summary.md';
-import HowToUseFwoaResults from './_10-how-to-use-fwoa-results.md';
-import Y2030 from './_11-2030.md';
-import Y2040 from './_12-2040.md';
-import Y2050 from './_13-2050.md';
-import Y2060 from './_14-2060.md';
-import Y2070 from './_15-2070.md';
-import Y2080 from './_16-2080.md';
-import KeyTakeawayChangeBuildsOverTime from './_17-key-takeaway-change-builds-over-time.md';
-import CallToAction from './_18-call-to-action.md';
+import OpeningPurposeAndContext from "./_01-opening-purpose-and-context.md";
+import FormationOfSouthLouisiana from "./_02-formation-of-south-louisiana.md";
+import ManagingWaterAndTheCoast from "./_03-managing-water-and-the-coast.md";
+import VisualizingCoastalChange from "./_04-visualizing-coastal-change.md";
+import MappingLandAndWater from "./_05-mapping-land-and-water.md";
+import HistoricalLandChange from "./_06-historical-land-change.md";
+import Y2024CurrentConditions from "./_07-2024-current-conditions.md";
+import UnderstandingAFutureWithoutAction from "./_08-understanding-a-future-without-action.md";
+import CoastwideSummary from "./_09-coastwide-summary.md";
+import HowToUseFwoaResults from "./_10-how-to-use-fwoa-results.md";
+import Y2030 from "./_11-2030.md";
+import Y2040 from "./_12-2040.md";
+import Y2050 from "./_13-2050.md";
+import Y2060 from "./_14-2060.md";
+import Y2070 from "./_15-2070.md";
+import Y2080 from "./_16-2080.md";
+import KeyTakeawayChangeBuildsOverTime from "./_17-key-takeaway-change-builds-over-time.md";
+import CallToAction from "./_18-call-to-action.md";
 
 {/* The video scrubs linearly from its first frame to its last across the whole story's
 scroll height (~392 frames at 10fps, ~39s), so a label's frame window is really a
@@ -35,19 +35,12 @@ StoryPage's sticky content box is translated with a CSS transform, which would t
 into the containing block for a nested StoryLabel's fixed positioning and break its
 viewport-relative placement. */}
 
-<StoryLabel startFrame={0} endFrame={12} style={{ top: "80px", bottom: "auto", left: "5dvw", right: "auto", background: "white", color: "black" }}>
-  SCROLL TO BEGIN
-</StoryLabel>
-
 <StoryTitlePage>
   <OpeningPurposeAndContext />
 </StoryTitlePage>
 
 {/* pan lets a label track a specific feature in the video as the user drags it,
 instead of staying pinned to a screen corner like the default */}
-<StoryLabel startFrame={16} endFrame={30} pan style={{ top: "120px", bottom: "auto", left: "10dvw", right: "auto" }}>
-  MISSISSIPPI RIVER DELTA
-</StoryLabel>
 
 <StoryPage>
   <FormationOfSouthLouisiana />
@@ -75,13 +68,28 @@ than the Historical Land Change page's own scroll window, so these labels delibe
 carry over the pages that follow. The 90 frames are divided evenly, ~13 per year. The
 1985–1995 label from the old merged page is split back into separate 1985 and 1995
 markers, since there are no longer pages to merge. */}
-<StoryLabel startFrame={103} endFrame={116}>1932</StoryLabel>
-<StoryLabel startFrame={116} endFrame={129}>1956</StoryLabel>
-<StoryLabel startFrame={129} endFrame={142}>1975</StoryLabel>
-<StoryLabel startFrame={142} endFrame={154}>1985</StoryLabel>
-<StoryLabel startFrame={154} endFrame={167}>1995</StoryLabel>
-<StoryLabel startFrame={167} endFrame={180}>2006</StoryLabel>
-<StoryLabel startFrame={180} endFrame={193}>2015</StoryLabel>
+
+<StoryLabel startFrame={103} endFrame={116}>
+  1932
+</StoryLabel>
+<StoryLabel startFrame={116} endFrame={129}>
+  1956
+</StoryLabel>
+<StoryLabel startFrame={129} endFrame={142}>
+  1975
+</StoryLabel>
+<StoryLabel startFrame={142} endFrame={154}>
+  1985
+</StoryLabel>
+<StoryLabel startFrame={154} endFrame={167}>
+  1995
+</StoryLabel>
+<StoryLabel startFrame={167} endFrame={180}>
+  2006
+</StoryLabel>
+<StoryLabel startFrame={180} endFrame={193}>
+  2015
+</StoryLabel>
 
 <StoryPage>
   <HistoricalLandChange />
@@ -89,7 +97,10 @@ markers, since there are no longer pages to merge. */}
 
 {/* Also video-locked: the 2024 imagery doesn't appear until frame 193, which lands on the
 How to Use FWOA Results page rather than the 2024 Current Conditions page. */}
-<StoryLabel startFrame={193} endFrame={213}>2024</StoryLabel>
+
+<StoryLabel startFrame={193} endFrame={213}>
+  2024
+</StoryLabel>
 
 <StoryPage>
   <Y2024CurrentConditions />
@@ -107,37 +118,49 @@ How to Use FWOA Results page rather than the 2024 Current Conditions page. */}
   <HowToUseFwoaResults />
 </StoryPage>
 
-<StoryLabel startFrame={217} endFrame={233}>2030</StoryLabel>
+<StoryLabel startFrame={217} endFrame={233}>
+  2030
+</StoryLabel>
 
 <StoryPage>
   <Y2030 />
 </StoryPage>
 
-<StoryLabel startFrame={239} endFrame={255}>2040</StoryLabel>
+<StoryLabel startFrame={239} endFrame={255}>
+  2040
+</StoryLabel>
 
 <StoryPage>
   <Y2040 />
 </StoryPage>
 
-<StoryLabel startFrame={262} endFrame={278}>2050</StoryLabel>
+<StoryLabel startFrame={262} endFrame={278}>
+  2050
+</StoryLabel>
 
 <StoryPage>
   <Y2050 />
 </StoryPage>
 
-<StoryLabel startFrame={283} endFrame={298}>2060</StoryLabel>
+<StoryLabel startFrame={283} endFrame={298}>
+  2060
+</StoryLabel>
 
 <StoryPage>
   <Y2060 />
 </StoryPage>
 
-<StoryLabel startFrame={305} endFrame={321}>2070</StoryLabel>
+<StoryLabel startFrame={305} endFrame={321}>
+  2070
+</StoryLabel>
 
 <StoryPage>
   <Y2070 />
 </StoryPage>
 
-<StoryLabel startFrame={327} endFrame={343}>2080</StoryLabel>
+<StoryLabel startFrame={327} endFrame={343}>
+  2080
+</StoryLabel>
 
 <StoryPage>
   <Y2080 />
