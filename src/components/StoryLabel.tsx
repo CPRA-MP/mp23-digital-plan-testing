@@ -33,7 +33,10 @@ export default function StoryLabel({
   return (
     <div
       ref={ref}
-      className={`fixed z-150 bottom-[20px] right-[5dvw] bg-black text-white font-bold p-3 ${className}`}
+      // A label authored in MDX on its own line comes through as a <p>, which picks
+      // up Infima's paragraph margin-bottom and pads the box out below the text, so
+      // zero it here rather than relying on every usage being written inline.
+      className={`fixed z-150 bottom-[20px] right-[5dvw] bg-black text-white font-bold p-3 [&_p]:m-0 ${className}`}
       style={{ display: "none", ...style }}
     >
       {children}

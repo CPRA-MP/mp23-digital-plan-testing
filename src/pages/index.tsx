@@ -17,15 +17,18 @@ import Intro from "./intro/_intro.mdx";
  * this walks up to the card's StoryPage wrapper and scrolls that into the pinned
  * position instead.
  *
- * Every StoryPage wrapper shares the same geometry (2x page-height, holding the
- * sticky card centered for the ~first 45% of that height before it releases and
- * scrolls away with the rest of the page) since none of the `<StoryPage>` usages
- * in _intro.mdx pass startFrame/endFrame. Aligning the wrapper's own top edge to
- * the viewport's top edge (i.e. scrolling to its document-space top) lands
- * comfortably inside that pinned window (empirically ~340-420px of slack on
- * either side), which is simpler and more robust than trying to compute the
- * sticky box's exact pinned window from CSS custom properties. Falls back to
- * centering the heading itself for content that isn't a StoryPage card (e.g. the
+ * StoryPage wrappers aren't all the same height — each is its own frame span over
+ * framesPerPageHeight, so they range from one page-height (the 11-frame gap) to
+ * about nine (the 100-frame decade gaps). What they do share is where the pinned
+ * window sits relative to their own top edge: the sticky card pins from half a
+ * page-height above the wrapper's top down to its bottom, less the half-page-height
+ * of padding and the card's own height. So aligning the wrapper's top edge to the
+ * viewport's top edge (i.e. scrolling to its document-space top) lands half a
+ * page-height into that window on every page — simpler and more robust than
+ * computing the sticky box's exact pinned window from CSS custom properties. The
+ * slack above shrinks as pages get shorter, so if framesPerPageHeight is ever
+ * raised past the smallest frame gap this is the first thing to break. Falls back
+ * to centering the heading itself for content that isn't a StoryPage card (e.g. the
  * call-to-action page, which renders in normal flow). */
 function useScrollToHashCard() {
   useLayoutEffect(() => {
@@ -62,7 +65,14 @@ export default function Home(): ReactNode {
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <main id="overview">
-        <VideoStory src="https://api.mpdp.coastal.la.gov/static/video/intro-20260909-05years.mp4">
+        {/* 11 = the smallest frame gap between adjacent cards in _intro.mdx (the 11
+        frames from 2024 Current Conditions at 111 to Understanding a Future Without
+        Action at 122), the largest value that keeps every page at least a full
+        page-height. Puts the 630-frame story at ~57 page-heights of scroll. */}
+        <VideoStory
+          src="https://api.mpdp.coastal.la.gov/static/video/intro-20260917-longer.mp4"
+          framesPerPageHeight={11}
+        >
           <MDXContent>
             <Intro />
           </MDXContent>

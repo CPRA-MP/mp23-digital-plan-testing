@@ -1,4 +1,5 @@
 import {
+  CSSProperties,
   ReactNode,
   useRef,
   useLayoutEffect,
@@ -33,12 +34,21 @@ export const StoryLabelContext = createContext<
 export default function VideoStory({
   src,
   fps = 10,
+  framesPerPageHeight,
   children,
 }: {
   src: string;
   /** Frame rate of the source video, used to convert StoryLabel's startFrame/
    * endFrame props into playback time. */
   fps?: number;
+  /** How many video frames one page-height of scroll covers, i.e. the whole story's
+   * pacing dial: the scroll height works out to (total frames / this) page-heights,
+   * so lower means a longer, slower scroll. Must be no larger than the smallest
+   * frame gap between two adjacent StoryPages, or that page ends up shorter than the
+   * half-page-height of padding StoryPage reserves and its card overflows. Passed
+   * down as a CSS custom property rather than a prop because StoryPages arrive as
+   * opaque MDX children — nothing here can thread a prop into them. */
+  framesPerPageHeight?: number;
   children: ReactNode;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -173,7 +183,17 @@ export default function VideoStory({
   }, []);
 
   return (
-    <div className="w-dvw cursor-grab select-none" ref={containerRef}>
+    <div
+      className="w-dvw cursor-grab select-none"
+      ref={containerRef}
+      style={
+        framesPerPageHeight != null
+          ? ({
+              "--frames-per-page-height": framesPerPageHeight,
+            } as CSSProperties)
+          : undefined
+      }
+    >
       <div className="bg-white w-dvw overflow-hidden sticky top-(--header-height) z-1">
         <video
           src={src}

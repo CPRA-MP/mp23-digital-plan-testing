@@ -1,10 +1,16 @@
 import { ReactNode, useLayoutEffect, useRef, useState } from "react";
 import useMeasure from "react-use-measure";
 
-/** How many video frames of resting time fit into one page-height's worth of extra
- * scroll. Only matters when startFrame/endFrame are given — raise it to make a given
- * frame range cover less scroll distance (faster pacing), lower it for more. */
-const FRAMES_PER_PAGE_HEIGHT = 100;
+/** Fallback for `--frames-per-page-height` when the story doesn't set one. See
+ * VideoStory's `framesPerPageHeight` prop for how to pick a value. */
+const DEFAULT_FRAMES_PER_PAGE_HEIGHT = 10;
+
+/** Length of a StoryPage that has no startFrame/endFrame, in page-heights. Unlike a
+ * framed page this isn't tied to the video: it's scroll distance the frame mapping
+ * doesn't account for, which shifts every card after it later AND (because the video
+ * scrubs across the container's whole height) pulls every card in the story slightly
+ * earlier. Prefer giving a page real frames over relying on this. */
+const UNFRAMED_PAGE_HEIGHTS = 2;
 
 export default function StoryPage({
   children,
@@ -25,12 +31,14 @@ export default function StoryPage({
    * centered before scroll starts moving it. */
   first?: boolean;
   /** The video frame at which this page's content reaches its resting position,
-   * vertically centered on the screen. Together with endFrame this sets how much
-   * scroll distance the page holds still for before it starts leaving. Omit both to
-   * keep the previous fixed page length. */
+   * vertically centered on the screen — normally the frame of the storyboard card
+   * this page renders. Omit both frames to fall back to a fixed page length. */
   startFrame?: number;
-  /** The video frame at which this page's content starts scrolling upward off the
-   * screen, ending the hold that began at startFrame. */
+  /** The video frame at which the next page's content takes over, i.e. the next
+   * page's startFrame. The page's height is exactly this span of frames converted to
+   * scroll distance, with no fixed component — that proportionality is what keeps a
+   * card arriving on the video frame it belongs to, so don't add a minimum height
+   * here; lower `--frames-per-page-height` instead if a page is too short. */
   endFrame?: number;
   /** Extra classes appended after the inner wrapper's default styles, so they
    * can add to or override them. */
@@ -52,10 +60,15 @@ export default function StoryPage({
     return () => window.removeEventListener("resize", recompute);
   }, [first, bounds.height]);
 
-  const hold =
-    startFrame != null && endFrame != null
-      ? (endFrame - startFrame) / FRAMES_PER_PAGE_HEIGHT
-      : 0.5;
+  // Purely proportional to the frame span — a fixed base term would compress the
+  // storyboard's dynamic range (gaps here run ~10x, a 1.5 base flattened that to
+  // ~1.6x) and leave cards landing tens of frames away from their video moment.
+  const span =
+    startFrame != null && endFrame != null ? endFrame - startFrame : null;
+  const height =
+    span != null
+      ? `calc(${span} / var(--frames-per-page-height, ${DEFAULT_FRAMES_PER_PAGE_HEIGHT}) * var(--page-height))`
+      : `calc(${UNFRAMED_PAGE_HEIGHTS} * var(--page-height))`;
 
   const stickyBox = (
     <div
@@ -73,7 +86,7 @@ export default function StoryPage({
     <div
       ref={first ? pageRef : undefined}
       data-story-page
-      style={{ height: `calc((1.5 + ${hold}) * var(--page-height))` }}
+      style={{ height }}
       className={`relative z-100 pb-[calc(0.5*var(--page-height))] ${
         first ? "mt-[calc(var(--page-height)*-1)]" : ""
       }`}
