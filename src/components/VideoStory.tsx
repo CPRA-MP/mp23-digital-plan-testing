@@ -123,6 +123,17 @@ export default function VideoStory({
           onUpdate: updateLabels,
         },
       );
+      // The ScrollTrigger above tracks scroll from the moment the timeline is
+      // created, but a scrubbed trigger only writes its progress into an animation
+      // on a scroll tick — it doesn't retroactively apply the position it already
+      // holds to a tween added later. The video is a remote file whose metadata can
+      // land ~10s after first paint, so on a #deep-link load (index.tsx scrolls the
+      // target card into view on mount) the scroll is long over by the time this
+      // runs and no further tick is coming: without this the video sits frozen on
+      // frame 0 until the user nudges the page. refresh() rather than update()
+      // because it also re-measures start/end, which are stale for the same reason
+      // — StoryPage heights settle via ResizeObserver over that same window.
+      tl.scrollTrigger?.refresh();
     }
 
     // If the video is served from cache, metadata can already be available by the
