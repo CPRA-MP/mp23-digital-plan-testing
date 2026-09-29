@@ -20,11 +20,16 @@ import KeyTakeawayChangeBuildsOverTime from "./_17-key-takeaway-change-builds-ov
 import CallToAction from "./_18-call-to-action.md";
 
 {/* Frame numbers throughout this file are absolute frames of the source video at 10fps,
-taken from longer_timings.pdf — the storyboard that pairs every card and every yellow
-post-it year marker with the video frame it belongs to. Its last card is frame 630 (~63s).
-Apart from the 2080 page, which the video never reaches, the pages below are 1:1 with the
-storyboard cards, in the same order — so if you add or drop a page, re-check it against
-the PDF rather than just renumbering around it.
+taken from "Updated Frame Reference.pdf" — the storyboard that pairs every card and every
+yellow post-it year marker with the video frame it belongs to. Its last card is frame 194
+(the call to action); the video itself runs to 196 (~19.6s). Apart from the 2080 page,
+which the video never reaches, the pages below are 1:1 with the storyboard cards, in the
+same order — so if you add or drop a page, re-check it against the PDF rather than just
+renumbering around it.
+
+A page's startFrame is the frame of its *first* storyboard card. Several pages hold more
+than one card — their later cards (f24, f59, f74) are intermediate beats the storyboard
+gives a frame but this file doesn't split a page for.
 
 The two kinds of frame props work differently. StoryLabel windows are exact: VideoStory
 toggles a label purely off `video.currentTime * fps`, so a label appears at the frame named
@@ -34,9 +39,11 @@ only reason a card arrives near its own video frame, so a page whose frames don'
 storyboard doesn't just pace oddly, it drags every card after it off its frame.
 
 What still isn't frame-mapped: the title page, the 2080 page, and the call-to-action page
-all take a fixed length. Each one both pushes the cards after it later and (since the video
-scrubs across the container's full height) pulls every card in the story slightly earlier,
-so expect some residual drift until they're given frames or dropped.
+all take a fixed length. (The storyboard does give the title page f0 and the call to action
+f194, but both render outside the framed-page flow.) Each one both pushes the cards after
+it later and (since the video scrubs across the container's full height) pulls every card in
+the story slightly earlier, so expect some residual drift until they're given frames or
+dropped.
 
 StoryLabel is placed as a sibling of StoryPage, not nested inside it — StoryPage's sticky
 content box is translated with a CSS transform, which would turn it into the containing
@@ -54,7 +61,7 @@ instead of staying pinned to a screen corner like the default */}
   <FormationOfSouthLouisiana />
 </StoryPage>
 
-<StoryPage startFrame={34} endFrame={66}>
+<StoryPage startFrame={34} endFrame={48}>
   <VisualizingCoastalChange />
 </StoryPage>
 
@@ -66,199 +73,199 @@ then a single 2024/TODAY marker over the present-day coast. Every window's endFr
 next window's startFrame, so a marker stays up until the one after it takes over; a gap
 would read as the timeline stalling. */}
 
-<StoryLabel startFrame={72} endFrame={81}>
+<StoryLabel startFrame={63} endFrame={65}>
   1932
 </StoryLabel>
-<StoryLabel startFrame={81} endFrame={91}>
+<StoryLabel startFrame={65} endFrame={67}>
   1932-1956
 </StoryLabel>
-<StoryLabel startFrame={91} endFrame={101}>
+<StoryLabel startFrame={67} endFrame={69}>
   1956-1985
 </StoryLabel>
-<StoryLabel startFrame={101} endFrame={111}>
+<StoryLabel startFrame={69} endFrame={71}>
   1985-2004
 </StoryLabel>
-<StoryLabel startFrame={111} endFrame={142}>
+<StoryLabel startFrame={71} endFrame={91}>
   2004-2024
 </StoryLabel>
 
-<StoryPage startFrame={66} endFrame={111}>
+<StoryPage startFrame={48} endFrame={71}>
   <MappingHistoricalLandChange />
 </StoryPage>
 
-<StoryLabel startFrame={142} endFrame={160}>
+<StoryLabel startFrame={91} endFrame={94}>
   2024/TODAY
 </StoryLabel>
 
-<StoryPage startFrame={111} endFrame={122}>
+<StoryPage startFrame={71} endFrame={83}>
   <Y2024CurrentConditions />
 </StoryPage>
 
-<StoryPage startFrame={122} endFrame={142}>
+<StoryPage startFrame={83} endFrame={91}>
   <UnderstandingAFutureWithoutAction />
 </StoryPage>
 
-<StoryPage startFrame={142} endFrame={200}>
+<StoryPage startFrame={91} endFrame={102}>
   <UnderstandingAChangingCoast />
 </StoryPage>
 
 {/* Once the FWOA projection starts running, the storyboard replaces the era ranges with a
-year-by-year counter: one post-it per year from 2026 through 2070, 10 frames apart.
+year-by-year counter: one post-it per year from 2026 through 2070, 2 frames apart.
 There is no 2025 marker and nothing past 2070 — the video ends on the 2070 coast. */}
 
-<StoryLabel startFrame={160} endFrame={170}>
+<StoryLabel startFrame={94} endFrame={96}>
   2026
 </StoryLabel>
-<StoryLabel startFrame={170} endFrame={180}>
+<StoryLabel startFrame={96} endFrame={98}>
   2027
 </StoryLabel>
-<StoryLabel startFrame={180} endFrame={190}>
+<StoryLabel startFrame={98} endFrame={100}>
   2028
 </StoryLabel>
-<StoryLabel startFrame={190} endFrame={200}>
+<StoryLabel startFrame={100} endFrame={102}>
   2029
 </StoryLabel>
-<StoryLabel startFrame={200} endFrame={210}>
+<StoryLabel startFrame={102} endFrame={104}>
   2030
 </StoryLabel>
-<StoryLabel startFrame={210} endFrame={220}>
+<StoryLabel startFrame={104} endFrame={106}>
   2031
 </StoryLabel>
-<StoryLabel startFrame={220} endFrame={230}>
+<StoryLabel startFrame={106} endFrame={108}>
   2032
 </StoryLabel>
-<StoryLabel startFrame={230} endFrame={240}>
+<StoryLabel startFrame={108} endFrame={110}>
   2033
 </StoryLabel>
-<StoryLabel startFrame={240} endFrame={250}>
+<StoryLabel startFrame={110} endFrame={112}>
   2034
 </StoryLabel>
-<StoryLabel startFrame={250} endFrame={260}>
+<StoryLabel startFrame={112} endFrame={114}>
   2035
 </StoryLabel>
-<StoryLabel startFrame={260} endFrame={270}>
+<StoryLabel startFrame={114} endFrame={116}>
   2036
 </StoryLabel>
-<StoryLabel startFrame={270} endFrame={280}>
+<StoryLabel startFrame={116} endFrame={118}>
   2037
 </StoryLabel>
-<StoryLabel startFrame={280} endFrame={290}>
+<StoryLabel startFrame={118} endFrame={120}>
   2038
 </StoryLabel>
-<StoryLabel startFrame={290} endFrame={300}>
+<StoryLabel startFrame={120} endFrame={122}>
   2039
 </StoryLabel>
-<StoryLabel startFrame={300} endFrame={310}>
+<StoryLabel startFrame={122} endFrame={124}>
   2040
 </StoryLabel>
-<StoryLabel startFrame={310} endFrame={320}>
+<StoryLabel startFrame={124} endFrame={126}>
   2041
 </StoryLabel>
-<StoryLabel startFrame={320} endFrame={330}>
+<StoryLabel startFrame={126} endFrame={128}>
   2042
 </StoryLabel>
-<StoryLabel startFrame={330} endFrame={340}>
+<StoryLabel startFrame={128} endFrame={130}>
   2043
 </StoryLabel>
-<StoryLabel startFrame={340} endFrame={350}>
+<StoryLabel startFrame={130} endFrame={132}>
   2044
 </StoryLabel>
-<StoryLabel startFrame={350} endFrame={360}>
+<StoryLabel startFrame={132} endFrame={134}>
   2045
 </StoryLabel>
-<StoryLabel startFrame={360} endFrame={370}>
+<StoryLabel startFrame={134} endFrame={136}>
   2046
 </StoryLabel>
-<StoryLabel startFrame={370} endFrame={380}>
+<StoryLabel startFrame={136} endFrame={138}>
   2047
 </StoryLabel>
-<StoryLabel startFrame={380} endFrame={390}>
+<StoryLabel startFrame={138} endFrame={140}>
   2048
 </StoryLabel>
-<StoryLabel startFrame={390} endFrame={400}>
+<StoryLabel startFrame={140} endFrame={142}>
   2049
 </StoryLabel>
-<StoryLabel startFrame={400} endFrame={410}>
+<StoryLabel startFrame={142} endFrame={144}>
   2050
 </StoryLabel>
-<StoryLabel startFrame={410} endFrame={420}>
+<StoryLabel startFrame={144} endFrame={146}>
   2051
 </StoryLabel>
-<StoryLabel startFrame={420} endFrame={430}>
+<StoryLabel startFrame={146} endFrame={148}>
   2052
 </StoryLabel>
-<StoryLabel startFrame={430} endFrame={440}>
+<StoryLabel startFrame={148} endFrame={150}>
   2053
 </StoryLabel>
-<StoryLabel startFrame={440} endFrame={450}>
+<StoryLabel startFrame={150} endFrame={152}>
   2054
 </StoryLabel>
-<StoryLabel startFrame={450} endFrame={460}>
+<StoryLabel startFrame={152} endFrame={154}>
   2055
 </StoryLabel>
-<StoryLabel startFrame={460} endFrame={470}>
+<StoryLabel startFrame={154} endFrame={156}>
   2056
 </StoryLabel>
-<StoryLabel startFrame={470} endFrame={480}>
+<StoryLabel startFrame={156} endFrame={158}>
   2057
 </StoryLabel>
-<StoryLabel startFrame={480} endFrame={490}>
+<StoryLabel startFrame={158} endFrame={160}>
   2058
 </StoryLabel>
-<StoryLabel startFrame={490} endFrame={500}>
+<StoryLabel startFrame={160} endFrame={162}>
   2059
 </StoryLabel>
-<StoryLabel startFrame={500} endFrame={510}>
+<StoryLabel startFrame={162} endFrame={164}>
   2060
 </StoryLabel>
-<StoryLabel startFrame={510} endFrame={520}>
+<StoryLabel startFrame={164} endFrame={166}>
   2061
 </StoryLabel>
-<StoryLabel startFrame={520} endFrame={530}>
+<StoryLabel startFrame={166} endFrame={168}>
   2062
 </StoryLabel>
-<StoryLabel startFrame={530} endFrame={540}>
+<StoryLabel startFrame={168} endFrame={170}>
   2063
 </StoryLabel>
-<StoryLabel startFrame={540} endFrame={550}>
+<StoryLabel startFrame={170} endFrame={172}>
   2064
 </StoryLabel>
-<StoryLabel startFrame={550} endFrame={560}>
+<StoryLabel startFrame={172} endFrame={174}>
   2065
 </StoryLabel>
-<StoryLabel startFrame={560} endFrame={570}>
+<StoryLabel startFrame={174} endFrame={176}>
   2066
 </StoryLabel>
-<StoryLabel startFrame={570} endFrame={580}>
+<StoryLabel startFrame={176} endFrame={178}>
   2067
 </StoryLabel>
-<StoryLabel startFrame={580} endFrame={590}>
+<StoryLabel startFrame={178} endFrame={180}>
   2068
 </StoryLabel>
-<StoryLabel startFrame={590} endFrame={600}>
+<StoryLabel startFrame={180} endFrame={182}>
   2069
 </StoryLabel>
-<StoryLabel startFrame={600} endFrame={616}>
+<StoryLabel startFrame={182} endFrame={186}>
   2070
 </StoryLabel>
 
-<StoryPage startFrame={200} endFrame={300}>
+<StoryPage startFrame={102} endFrame={122}>
   <Y2030 />
 </StoryPage>
 
-<StoryPage startFrame={300} endFrame={400}>
+<StoryPage startFrame={122} endFrame={142}>
   <Y2040 />
 </StoryPage>
 
-<StoryPage startFrame={400} endFrame={500}>
+<StoryPage startFrame={142} endFrame={162}>
   <Y2050 />
 </StoryPage>
 
-<StoryPage startFrame={500} endFrame={600}>
+<StoryPage startFrame={162} endFrame={182}>
   <Y2060 />
 </StoryPage>
 
-<StoryPage startFrame={600} endFrame={616}>
+<StoryPage startFrame={182} endFrame={186}>
   <Y2070 />
 </StoryPage>
 
@@ -269,7 +276,7 @@ keeps the default page length. */}
   <Y2080 />
 </StoryPage>
 
-<StoryPage startFrame={616} endFrame={630}>
+<StoryPage startFrame={186} endFrame={194}>
   <KeyTakeawayChangeBuildsOverTime />
 </StoryPage>
 
