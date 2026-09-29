@@ -5,27 +5,50 @@ description: Model results for the Future Without Action scenario
 
 # Model Results
 
-## Land Change
+## What Could Louisiana's Coast Look Like in the Future?
 
-import MiniPortal from '@site/src/components/MiniPortal';
+The Future Without Action (FWOA) modeling results show how Louisiana's coast may change over the next 50 years if no additional restoration or risk reduction projects are implemented.
 
-<MiniPortal title="Land Type" variable="lnd_type" grid="morph_pixel_v001" time_unit="annual" model_group_id={500} scenario_id={[[7, "Lower"], [8, "Higher"]]} />
+Explore projected changes in land and water, vegetation and habitat, wetland condition, and regional patterns across the coast. Each result highlights a different aspect of future coastal change to provide a broader picture of how Louisiana's landscape may evolve over time and from place to place. Viewing results across multiple years, locations, and indicators can help reveal patterns that may not be apparent from a single map or metric alone.
 
-<MiniPortal title="Mean Annual Salinity" variable="sal" grid="hydro_compartment_v001" time_unit="annual" aggregate_type="mean" scenario_id={[[7, "Lower"], [8, "Higher"]]} />
+## Understanding the Results
 
-### Lower Scenario
+These results are designed provided soto help users can explore potential future coastal conditions and understand how different aspects of the coast may change over time.
 
-Because Louisiana’s coast is a dynamic system that will continue to be impacted by a changing climate, environmental conditions 50 years in the future will be different from those experienced today. Predictions of the FWOA landscape define the scale of the land loss challenge in coming decades and serve as a baseline against which candidate projects can be compared to determine their potential benefit. 
+The maps and visualizations can be used to identify broad trends, compare locations, and examine how changes in land, water, vegetation, habitat, and wetland condition relate to one another. Additional charts and time-series information provide more detail about how individual indicators change throughout the 50-year modeling period.
 
-Land change projections for the master plan’s lower environmental scenario, one of two scenarios used for project selection, are shown above. Under this environmental scenario, coastal Louisiana would experience moderate climate change impacts, including sea level rise of 1.6 ft over 50 years. Without the 2023 Coastal Master Plan projects, the lower scenario ICM outputs predict 1,100 sq mi of land lost in that same time period. Much of the projected loss is concentrated in lower basins and on marsh edges.
+The results are not exact predictions of future conditions. They represent plausible futures based on the best available science, data, and assumptions used in the modeling effort. They should be considered alongside local knowledge, field observations, and project-specific information.
 
+## Explore the Results
 
-### Higher Scenario
+The results are organized into three groups, each offering a different perspective on future coastal change to help us think about where, how, and when to intervene to change outcomes.
 
-Planning under uncertainty requires considering multiple possible future environmental scenarios to understand the range of possible outcomes that the master plan may need to address. Land change projections for the master plan’s higher environmental scenario after 50 years are shown above. Under this possible environmental scenario, coastal Louisiana would experience severe climate change impacts, including sea level rise of up to 2.5 ft over the next 50 years. Without the projects selected for the 2023 Coastal Master Plan, the higher scenario ICM outputs predict extensive land loss of 3,000 sq mi over that same time period, with every region of the coast affected. 
+### Land & Water
 
-Due to uncertainty around future climate conditions, both scenarios are used in the development of the 2023 Coastal Master Plan to represent a range of future landscapes and to select robust projects that can provide benefits for the coast for whatever future conditions transpire.
+Explore projected changes in land type, land-water patterns, and water depth to understand how Louisiana's physical landscape may change over time.
 
-## Flood Depths
+These results can help answer questions such as:
 
-FOWA modeling for flood depths is currently underway.
+- Where may land be gained, lost, or transformed?
+- How might the balance between land and water change?
+- Where could water depths increase or decrease over time?
+
+### Vegetation & Habitat
+
+Explore marsh classification, vegetation communities, habitat diversity, and wetland value to understand potential ecological changes across the coast.
+
+These results help illustrate how coastal ecosystems may respond to changing environmental conditions and how habitat quality and diversity may vary through time.
+
+### Regional Perspectives
+
+Regional summaries provide another way to explore the results by highlighting local patterns, trends, and changes that may be less visible at the coastwide scale.
+
+Each result includes interactive maps, supporting visualizations, and additional information to help explain what the results show and how they should be interpreted.
+
+## Looking Coastwide
+
+No single result tells the whole story.
+
+Changes in land, water, vegetation, habitat, and wetland condition are closely connected. Looking across multiple results can provide a more complete understanding of how Louisiana's coast may change over the coming decades. They can also help to determineinform insights on what those changes could mean for communities, natural resources, industries, and working landscapeslivelihoods and how to address coastal challenges.
+
+For users interested in knowing more about the science behind the results, additional information about model assumptions, data sources, and analytical methods is available in the Data & Methods and Technical Details sections.
