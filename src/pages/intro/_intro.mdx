@@ -126,6 +126,19 @@ Takeaway card at f125, since nothing in the storyboard replaces it before then. 
   2070s
 </StoryLabel>
 
+{/* The land change legend for the projected maps, shown over the year-by-year frames only
+(2030 at f72 through 2079 at f121). It's a StoryLabel restyled into the top-right corner, just
+under the navbar, rather than a component of its own, since a StoryLabel already does the
+frame-window toggling. */}
+
+<StoryLabel
+  startFrame={72}
+  endFrame={122}
+  className="!top-[calc(var(--header-height)+20px)] !bottom-auto !bg-white/90 !p-2 [&_img]:block [&_img]:w-[340px] [&_img]:max-w-[40dvw]"
+>
+  ![Land change and confidence legend](/img/land_confidence_legend.svg)
+</StoryLabel>
+
 <StoryPage startFrame={72} endFrame={82}>
   <Y2030 />
 </StoryPage>
