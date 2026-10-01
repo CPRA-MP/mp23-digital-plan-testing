@@ -1,4 +1,4 @@
-## Understanding a Future Without Action
+## A Future Without Action
 
 As part of the MP29 analysis, CPRA uses models to evaluate potential changes across a range of coastal indicators, including land area, water depth, habitat, wetland condition, flood risk, and regional patterns.
 
