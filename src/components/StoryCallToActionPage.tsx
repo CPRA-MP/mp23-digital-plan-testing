@@ -4,8 +4,9 @@ import { ReactNode } from "react";
  * numbered category cards plus a `.right` call-to-action column) instead of the
  * single boxed card the other StoryPages use. Unlike StoryPage, this renders in
  * normal document flow rather than a sticky/centered box — its content is much
- * taller than a typical card, and StoryPage's `top-50%`/`translate-y-[-50%]`
- * centering pushes anything taller than the viewport off the top of the screen.
+ * taller than a typical card, and StoryPage's sticky positioning (bottom-anchored,
+ * via a full-height translate-y) pushes anything taller than the viewport off the
+ * top of the screen.
  * A `min-h-dvh` flex-centered section grows to fit tall content instead of
  * clipping it, while still sitting inside the video-background's pinned scroll
  * range like every other page. */

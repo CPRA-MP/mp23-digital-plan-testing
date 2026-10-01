@@ -12,6 +12,10 @@ const DEFAULT_FRAMES_PER_PAGE_HEIGHT = 10;
  * earlier. Prefer giving a page real frames over relying on this. */
 const UNFRAMED_PAGE_HEIGHTS = 2;
 
+/** Where a (non-`first`) page's card rests while pinned: its bottom edge this many
+ * pixels above the bottom of the window. */
+export const RESTING_BOTTOM_OFFSET_PX = 100;
+
 export default function StoryPage({
   children,
   first = false,
@@ -28,10 +32,13 @@ export default function StoryPage({
    * sized so position:sticky's centering (top-50%/translate-y-[-50%], which resolves
    * against the viewport since no ancestor is a scroll container) lands exactly on
    * the wrapper's bottom-edge clamp — so there's no dead zone where it sits
-   * centered before scroll starts moving it. */
+   * centered before scroll starts moving it. The title page is the only `first`
+   * page and it starts scrolling away immediately, so it keeps the centered
+   * position rather than the bottom-anchored one the other pages rest at. */
   first?: boolean;
   /** The video frame at which this page's content reaches its resting position,
-   * vertically centered on the screen — normally the frame of the storyboard card
+   * with its bottom edge RESTING_BOTTOM_OFFSET_PX above the bottom of the window —
+   * normally the frame of the storyboard card
    * this page renders. Omit both frames to fall back to a fixed page length. */
   startFrame?: number;
   /** The video frame at which the next page's content takes over, i.e. the next
@@ -70,10 +77,20 @@ export default function StoryPage({
       ? `calc(${span} / var(--frames-per-page-height, ${DEFAULT_FRAMES_PER_PAGE_HEIGHT}) * var(--page-height))`
       : `calc(${UNFRAMED_PAGE_HEIGHTS} * var(--page-height))`;
 
+  // Same trick as the centering: a sticky `top` percentage resolves against the
+  // viewport, so pinning the box's top edge at 100% minus the offset and then
+  // translating it up by its own full height rests its bottom edge at the offset.
+  // The translate is visual only, so it doesn't change how long the box stays
+  // pinned (the page height minus its padding and the card's height, either way).
   const stickyBox = (
     <div
       ref={first ? boxRef : undefined}
-      className="sticky top-[50%] translate-y-[-50%]"
+      className={`sticky ${first ? "top-[50%] translate-y-[-50%]" : "translate-y-[-100%]"}`}
+      style={
+        first
+          ? undefined
+          : { top: `calc(100% - ${RESTING_BOTTOM_OFFSET_PX}px)` }
+      }
     >
       <div
         className={`bg-white text-black w-[60dvw] sm:w-[40dvw] max-w-150 ml-[5dvw] p-3 md:p-4 lg:p-6 cursor-auto text-sm md:text-base lg:text-lg [&_h2]:uppercase [&_h2]:text-lg md:[&_h2]:text-xl lg:[&_h2]:text-2xl [&_p]:leading-5 [&_*:last-child]:mb-0 ${className}`}

@@ -5,6 +5,7 @@ import Layout from "@theme/Layout";
 import MDXContent from "@theme/MDXContent";
 
 import VideoStory from "@site/src/components/VideoStory";
+import { RESTING_BOTTOM_OFFSET_PX } from "@site/src/components/StoryPage";
 
 import Intro from "./intro/_intro.mdx";
 
@@ -13,23 +14,17 @@ import Intro from "./intro/_intro.mdx";
  * StoryPage's `position: sticky` box, deep inside a tall scroll-driven wrapper.
  * The browser's own fragment-scroll (and a plain `scrollIntoView`) lands wherever
  * that heading's current, mid-transition position happens to be rather than the
- * pinned-centered position the card settles into once scrolled to normally — so
- * this walks up to the card's StoryPage wrapper and scrolls that into the pinned
- * position instead.
+ * pinned position the card settles into once scrolled to normally — so this walks
+ * up to the card's StoryPage wrapper and scrolls to where that card first pins.
  *
- * StoryPage wrappers aren't all the same height — each is its own frame span over
- * framesPerPageHeight, so they range from one and a half page-heights (the 6-frame gap) to
- * six (the 25-frame opening gap). What they do share is where the pinned
- * window sits relative to their own top edge: the sticky card pins from half a
- * page-height above the wrapper's top down to its bottom, less the half-page-height
- * of padding and the card's own height. So aligning the wrapper's top edge to the
- * viewport's top edge (i.e. scrolling to its document-space top) lands half a
- * page-height into that window on every page — simpler and more robust than
- * computing the sticky box's exact pinned window from CSS custom properties. The
- * slack above shrinks as pages get shorter, so if framesPerPageHeight is ever
- * raised past the smallest frame gap this is the first thing to break. Falls back
- * to centering the heading itself for content that isn't a StoryPage card (e.g. the
- * call-to-action page, which renders in normal flow). */
+ * The sticky box pins (top edge at the bottom of the window less
+ * RESTING_BOTTOM_OFFSET_PX, before its visual-only translate) as soon as the
+ * wrapper's top edge scrolls up to that line, so putting the wrapper's top there
+ * lands exactly at the start of the pinned window. Unlike aiming partway into the
+ * window, that holds however short the page is, as long as its pinned window isn't
+ * negative. Falls back to centering the heading
+ * itself for content that isn't a StoryPage card (e.g. the call-to-action page,
+ * which renders in normal flow). */
 function useScrollToHashCard() {
   useLayoutEffect(() => {
     function centerHashTarget() {
@@ -41,7 +36,9 @@ function useScrollToHashCard() {
       const rect = (card ?? heading).getBoundingClientRect();
       const docTop = rect.top + window.scrollY;
       window.scrollTo({
-        top: card ? docTop : docTop + rect.height / 2 - window.innerHeight / 2,
+        top: card
+          ? docTop - (window.innerHeight - RESTING_BOTTOM_OFFSET_PX)
+          : docTop + rect.height / 2 - window.innerHeight / 2,
         behavior: "instant",
       });
     }
