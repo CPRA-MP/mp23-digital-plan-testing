@@ -9,27 +9,29 @@ import VisualizingCoastalChange from "./_04-visualizing-coastal-change.md";
 import MappingHistoricalLandChange from "./_05-mapping-historical-land-change.md";
 import Y2024CurrentConditions from "./_07-2024-current-conditions.md";
 import UnderstandingAFutureWithoutAction from "./_08-understanding-a-future-without-action.md";
-import UnderstandingAChangingCoast from "./_09-understanding-a-changing-coast.md";
 import Y2030 from "./_11-2030.md";
 import Y2040 from "./_12-2040.md";
 import Y2050 from "./_13-2050.md";
 import Y2060 from "./_14-2060.md";
 import Y2070 from "./_15-2070.md";
-import Y2080 from "./_16-2080.md";
 import KeyTakeawayChangeBuildsOverTime from "./_17-key-takeaway-change-builds-over-time.md";
 import CallToAction from "./_18-call-to-action.md";
 
 {/* Frame numbers throughout this file are absolute frames of the source video at 10fps,
-taken from "Updated Frame Reference.pdf" — the storyboard that pairs every card and every
-yellow post-it year marker with the video frame it belongs to. Its last card is frame 194
-(the call to action); the video itself runs to 196 (~19.6s). Apart from the 2080 page,
-which the video never reaches, the pages below are 1:1 with the storyboard cards, in the
-same order — so if you add or drop a page, re-check it against the PDF rather than just
-renumbering around it.
+taken from "261001_Frame Reference.pdf" — the storyboard that pairs every card and every
+yellow post-it year marker with the video frame it belongs to. Its last card is frame 131
+(the call to action). The pages below are matched to the storyboard cards by their text,
+in the same order — so if you add or drop a page, re-check it against the PDF rather than
+just renumbering around it. (The video stops at 2079, so there's no 2080 page; its text is
+folded into the 2070s page.)
 
 A page's startFrame is the frame of its *first* storyboard card. Several pages hold more
-than one card — their later cards (f24, f59, f74) are intermediate beats the storyboard
-gives a frame but this file doesn't split a page for.
+than one card — their later cards (f15, f43–f53, f58) are intermediate beats the storyboard
+gives a frame but this file doesn't split a page for. The card at f63 straddles a page
+boundary (it shows the last paragraph of 2024 Current Conditions and the first of
+Understanding a Future Without Action); it's taken as the start of the latter. The
+storyboard's own timestamps disagree with its frame numbers in a few places (f2, f43, f47);
+the frame numbers are what's used here.
 
 The two kinds of frame props work differently. StoryLabel windows are exact: VideoStory
 toggles a label purely off `video.currentTime * fps`, so a label appears at the frame named
@@ -38,11 +40,11 @@ the page's height, in direct proportion to the frame span — that proportionali
 only reason a card arrives near its own video frame, so a page whose frames don't match the
 storyboard doesn't just pace oddly, it drags every card after it off its frame.
 
-What still isn't frame-mapped: the title page, the 2080 page, and the call-to-action page
-all take a fixed length. (The storyboard does give the title page f0 and the call to action
-f194, but both render outside the framed-page flow.) Each one both pushes the cards after
-it later and (since the video scrubs across the container's full height) pulls every card in
-the story slightly earlier, so expect some residual drift until they're given frames or
+What still isn't frame-mapped: the title page and the call-to-action page both take a
+fixed length. (The storyboard does give the title page f0 and the call to action f131, but
+both render outside the framed-page flow.) Each one both pushes the cards after it later
+and (since the video scrubs across the container's full height) pulls every card in the
+story slightly earlier, so expect some residual drift until they're given frames or
 dropped.
 
 StoryLabel is placed as a sibling of StoryPage, not nested inside it — StoryPage's sticky
@@ -57,226 +59,94 @@ placement. */}
 {/* pan lets a label track a specific feature in the video as the user drags it,
 instead of staying pinned to a screen corner like the default */}
 
-<StoryPage startFrame={6} endFrame={34}>
+<StoryPage startFrame={2} endFrame={27}>
   <FormationOfSouthLouisiana />
 </StoryPage>
 
-<StoryPage startFrame={34} endFrame={48}>
+<StoryPage startFrame={27} endFrame={39}>
   <VisualizingCoastalChange />
 </StoryPage>
 
 {/* The historical record is one page the reader scrolls the map through rather than a page
 per year, so the year markers tick across the video's historical footage instead of tracking
 page boundaries — they deliberately carry over the pages that follow. These are the
-storyboard's post-it notes verbatim: an era range while the historical imagery cross-fades,
-then a single 2024/TODAY marker over the present-day coast. Every window's endFrame is the
-next window's startFrame, so a marker stays up until the one after it takes over; a gap
-would read as the timeline stalling. */}
+storyboard's post-it notes verbatim: an era range while the historical imagery cross-fades.
+The storyboard has no separate 2024/TODAY marker, so 2004-2024 stays up across the return to
+the present-day coast until the 2030s marker takes over. Every window's endFrame is the next
+window's startFrame, so a marker stays up until the one after it takes over; a gap would read
+as the timeline stalling. */}
 
-<StoryLabel startFrame={63} endFrame={65}>
+<StoryLabel startFrame={47} endFrame={49}>
   1932
 </StoryLabel>
-<StoryLabel startFrame={65} endFrame={67}>
+<StoryLabel startFrame={49} endFrame={51}>
   1932-1956
 </StoryLabel>
-<StoryLabel startFrame={67} endFrame={69}>
+<StoryLabel startFrame={51} endFrame={53}>
   1956-1985
 </StoryLabel>
-<StoryLabel startFrame={69} endFrame={71}>
+<StoryLabel startFrame={53} endFrame={55}>
   1985-2004
 </StoryLabel>
-<StoryLabel startFrame={71} endFrame={91}>
+<StoryLabel startFrame={55} endFrame={72}>
   2004-2024
 </StoryLabel>
 
-<StoryPage startFrame={48} endFrame={71}>
+<StoryPage startFrame={39} endFrame={55}>
   <MappingHistoricalLandChange />
 </StoryPage>
 
-<StoryLabel startFrame={91} endFrame={94}>
-  2024/TODAY
-</StoryLabel>
-
-<StoryPage startFrame={71} endFrame={83}>
+<StoryPage startFrame={55} endFrame={63}>
   <Y2024CurrentConditions />
 </StoryPage>
 
-<StoryPage startFrame={83} endFrame={91}>
+<StoryPage startFrame={63} endFrame={72}>
   <UnderstandingAFutureWithoutAction />
 </StoryPage>
 
-<StoryPage startFrame={91} endFrame={102}>
-  <UnderstandingAChangingCoast />
-</StoryPage>
+{/* Once the FWOA projection starts running, the storyboard counts year by year from 2030
+(f72) through 2079 (f121), one frame per year. That's too fast to read as individual years,
+so the labels here are per decade instead: each decade label starts on its xx30/xx40/…
+storyboard frame and runs until the next decade's. The 2070s label stays up until the Key
+Takeaway card at f125, since nothing in the storyboard replaces it before then. */}
 
-{/* Once the FWOA projection starts running, the storyboard replaces the era ranges with a
-year-by-year counter: one post-it per year from 2026 through 2070, 2 frames apart.
-There is no 2025 marker and nothing past 2070 — the video ends on the 2070 coast. */}
-
-<StoryLabel startFrame={94} endFrame={96}>
-  2026
+<StoryLabel startFrame={72} endFrame={82}>
+  2030s
 </StoryLabel>
-<StoryLabel startFrame={96} endFrame={98}>
-  2027
+<StoryLabel startFrame={82} endFrame={92}>
+  2040s
 </StoryLabel>
-<StoryLabel startFrame={98} endFrame={100}>
-  2028
+<StoryLabel startFrame={92} endFrame={102}>
+  2050s
 </StoryLabel>
-<StoryLabel startFrame={100} endFrame={102}>
-  2029
+<StoryLabel startFrame={102} endFrame={112}>
+  2060s
 </StoryLabel>
-<StoryLabel startFrame={102} endFrame={104}>
-  2030
-</StoryLabel>
-<StoryLabel startFrame={104} endFrame={106}>
-  2031
-</StoryLabel>
-<StoryLabel startFrame={106} endFrame={108}>
-  2032
-</StoryLabel>
-<StoryLabel startFrame={108} endFrame={110}>
-  2033
-</StoryLabel>
-<StoryLabel startFrame={110} endFrame={112}>
-  2034
-</StoryLabel>
-<StoryLabel startFrame={112} endFrame={114}>
-  2035
-</StoryLabel>
-<StoryLabel startFrame={114} endFrame={116}>
-  2036
-</StoryLabel>
-<StoryLabel startFrame={116} endFrame={118}>
-  2037
-</StoryLabel>
-<StoryLabel startFrame={118} endFrame={120}>
-  2038
-</StoryLabel>
-<StoryLabel startFrame={120} endFrame={122}>
-  2039
-</StoryLabel>
-<StoryLabel startFrame={122} endFrame={124}>
-  2040
-</StoryLabel>
-<StoryLabel startFrame={124} endFrame={126}>
-  2041
-</StoryLabel>
-<StoryLabel startFrame={126} endFrame={128}>
-  2042
-</StoryLabel>
-<StoryLabel startFrame={128} endFrame={130}>
-  2043
-</StoryLabel>
-<StoryLabel startFrame={130} endFrame={132}>
-  2044
-</StoryLabel>
-<StoryLabel startFrame={132} endFrame={134}>
-  2045
-</StoryLabel>
-<StoryLabel startFrame={134} endFrame={136}>
-  2046
-</StoryLabel>
-<StoryLabel startFrame={136} endFrame={138}>
-  2047
-</StoryLabel>
-<StoryLabel startFrame={138} endFrame={140}>
-  2048
-</StoryLabel>
-<StoryLabel startFrame={140} endFrame={142}>
-  2049
-</StoryLabel>
-<StoryLabel startFrame={142} endFrame={144}>
-  2050
-</StoryLabel>
-<StoryLabel startFrame={144} endFrame={146}>
-  2051
-</StoryLabel>
-<StoryLabel startFrame={146} endFrame={148}>
-  2052
-</StoryLabel>
-<StoryLabel startFrame={148} endFrame={150}>
-  2053
-</StoryLabel>
-<StoryLabel startFrame={150} endFrame={152}>
-  2054
-</StoryLabel>
-<StoryLabel startFrame={152} endFrame={154}>
-  2055
-</StoryLabel>
-<StoryLabel startFrame={154} endFrame={156}>
-  2056
-</StoryLabel>
-<StoryLabel startFrame={156} endFrame={158}>
-  2057
-</StoryLabel>
-<StoryLabel startFrame={158} endFrame={160}>
-  2058
-</StoryLabel>
-<StoryLabel startFrame={160} endFrame={162}>
-  2059
-</StoryLabel>
-<StoryLabel startFrame={162} endFrame={164}>
-  2060
-</StoryLabel>
-<StoryLabel startFrame={164} endFrame={166}>
-  2061
-</StoryLabel>
-<StoryLabel startFrame={166} endFrame={168}>
-  2062
-</StoryLabel>
-<StoryLabel startFrame={168} endFrame={170}>
-  2063
-</StoryLabel>
-<StoryLabel startFrame={170} endFrame={172}>
-  2064
-</StoryLabel>
-<StoryLabel startFrame={172} endFrame={174}>
-  2065
-</StoryLabel>
-<StoryLabel startFrame={174} endFrame={176}>
-  2066
-</StoryLabel>
-<StoryLabel startFrame={176} endFrame={178}>
-  2067
-</StoryLabel>
-<StoryLabel startFrame={178} endFrame={180}>
-  2068
-</StoryLabel>
-<StoryLabel startFrame={180} endFrame={182}>
-  2069
-</StoryLabel>
-<StoryLabel startFrame={182} endFrame={186}>
-  2070
+<StoryLabel startFrame={112} endFrame={125}>
+  2070s
 </StoryLabel>
 
-<StoryPage startFrame={102} endFrame={122}>
+<StoryPage startFrame={72} endFrame={82}>
   <Y2030 />
 </StoryPage>
 
-<StoryPage startFrame={122} endFrame={142}>
+<StoryPage startFrame={82} endFrame={92}>
   <Y2040 />
 </StoryPage>
 
-<StoryPage startFrame={142} endFrame={162}>
+<StoryPage startFrame={92} endFrame={102}>
   <Y2050 />
 </StoryPage>
 
-<StoryPage startFrame={162} endFrame={182}>
+<StoryPage startFrame={102} endFrame={112}>
   <Y2060 />
 </StoryPage>
 
-<StoryPage startFrame={182} endFrame={186}>
+<StoryPage startFrame={112} endFrame={125}>
   <Y2070 />
 </StoryPage>
 
-{/* The video stops at 2070, so this page has no storyboard card and no year marker, and it
-keeps the default page length. */}
-
-<StoryPage>
-  <Y2080 />
-</StoryPage>
-
-<StoryPage startFrame={186} endFrame={194}>
+<StoryPage startFrame={125} endFrame={131}>
   <KeyTakeawayChangeBuildsOverTime />
 </StoryPage>
 

@@ -18,8 +18,8 @@ import Intro from "./intro/_intro.mdx";
  * position instead.
  *
  * StoryPage wrappers aren't all the same height — each is its own frame span over
- * framesPerPageHeight, so they range from one page-height (the 4-frame gap) to
- * seven (the 28-frame opening gap). What they do share is where the pinned
+ * framesPerPageHeight, so they range from one and a half page-heights (the 6-frame gap) to
+ * six (the 25-frame opening gap). What they do share is where the pinned
  * window sits relative to their own top edge: the sticky card pins from half a
  * page-height above the wrapper's top down to its bottom, less the half-page-height
  * of padding and the card's own height. So aligning the wrapper's top edge to the
@@ -65,12 +65,11 @@ export default function Home(): ReactNode {
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
       <main id="overview">
-        {/* 4 = the smallest frame gap between adjacent cards in _intro.mdx (the 4
-        frames from 2070 at 182 to Key Takeaway at 186), the largest value that keeps
-        every page at least a full page-height. Puts the 194-frame story at ~49
-        page-heights of scroll. */}
+        {/* 4 keeps every page at least a full page-height: the smallest frame gap
+        between adjacent cards in _intro.mdx is 6 (Key Takeaway at 125 to the call to
+        action at 131). Puts the 131-frame story at ~33 page-heights of scroll. */}
         <VideoStory
-          src="https://api.mpdp.coastal.la.gov/static/video/intro-20260929.mp4"
+          src="https://api.mpdp.coastal.la.gov/static/video/intro-20261001.mp4"
           framesPerPageHeight={4}
         >
           <MDXContent>
